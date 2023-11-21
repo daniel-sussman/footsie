@@ -4,10 +4,12 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.all
+    @open_games = @games.reject { |game| closed?(game) }
   end
 
   def show
     @game = Game.find(params[:id])
+    @players = @game.players.select{ |player| PlayerGame.find_by(game_id: @game.id, player_id: player.id).active }
     if player_signed_in?
       @player = current_player
       @player_game = PlayerGame.where("game_id = #{@game.id} AND player_id = #{@player.id}").last
@@ -53,12 +55,33 @@ class GamesController < ApplicationController
     params.require(:game).permit(:name, :description, :price, :gender, :team_size, :pitch_identifier, :pitch_type, :indoor, :address, :starting_date, :ending_date, :recurring_rule, :photo)
   end
 
+  def closed?(game)
+    if player_signed_in?
+      full?(game) || wrong_gender?(game)
+    else
+      full?(game)
+    end
+  end
+
+  def full?(game)
+    game
+      .players
+      .select { |player| PlayerGame.find_by(game_id: game.id, player_id: player.id).active }
+      .size >= (game.team_size * 2) - 1
+  end
+
+  def wrong_gender?(game)
+    game.gender != "co-ed" && game.gender != current_player.gender
+  end
+
   def fetch_player_status
     if @game.player == @player
       "owner"
-    elsif @game.players.include?(@player) && @player_game.active
+    elsif @players.include?(@player)
       "member"
-    elsif @game.players.size >= ((@game.team_size * 2) - 1)
+    elsif wrong_gender?(@game)
+      "wrong_gender"
+    elsif full?(@game)
       "full"
     else
       "join"

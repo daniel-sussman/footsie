@@ -6,7 +6,7 @@
       </article>
       <div class="row">
         <% @games.each do |game| %>
-          <div class="col-md-3">
+          <div class="col-md-3" style="color: <%= @open_games.include?(game) ? 'green' : 'red' %>;">
             <h2><%= game.name %></h2>
             <p><%= game.address %></p>
             <p>£<%= game.price %> per person</p>

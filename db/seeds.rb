@@ -9,7 +9,8 @@ puts "Generating 35 new players..."
   description = "#{Faker::Sports::Football.position}. #{Faker::Quote.mitch_hedberg}"
   address = Faker::Address.full_address
   gender = %w[male female].sample
-  Player.create(name: name, description: description, address: address, gender: gender)
+  email = Faker::Internet.email
+  Player.create(name: name, description: description, address: address, gender: gender, email: email, password: '123456')
 end
 
 puts "Game generation Start."

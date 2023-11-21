@@ -15,6 +15,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_20_160829) do
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
+    t.string "name"
     t.text "description"
     t.string "gender"
     t.integer "team_size"

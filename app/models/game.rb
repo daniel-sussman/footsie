@@ -6,6 +6,7 @@ class Game < ApplicationRecord
   # Add Validation table field base role
   validates :description, presence: true
   validates :address, presence: true
+  validates :name, presence: true
   validates :gender, acceptance: { accept: ['male', 'female'] }
   validates :team_size, numericality: { only_integer: true, greater_than_or_equal_to: 5, less_than_or_equal_to: 11 }
   validates :pitch_type, presence: true

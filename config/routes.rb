@@ -1,12 +1,4 @@
-Rails.application.routes.draw do
-  get 'games/index'
-  get 'games/show'
-  get 'games/new'
-  get 'games/create'
-  get 'games/edit'
-  get 'games/update'
-  get 'games/destroy'
-  # root to: "pages#home"
+ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

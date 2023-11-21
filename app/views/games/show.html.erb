@@ -1,2 +1,20 @@
-<h1>Games#show</h1>
-<p>Find me in app/views/games/show.html.erb</p>
+<h1><%= @game.title %></h1>
+
+<p><%= @game.description %></p>
+<p>Price per person: £<%=@game.price %></p>
+<p>Gender: <%= @game.gender %></p>
+<p>Match time & date: <%= @game.starting_date %></p>
+<p>Maximum players: <%= 2 * @game.team_size %></p>
+
+<h3>Location</h3>
+<p>Pitch ID: <%= @game.pitch_identifier %></p>
+<p>Pitch type: <%= @game.pitch_type %></p>
+<p>Pitch address: <%= @game.address %></p>
+
+<%= link_to "Join Game", game_path(@game) %>
+
+<%# Make delete accessible only to host of game? %>
+<%= link_to "Delete",
+  game_path(@game),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+%>

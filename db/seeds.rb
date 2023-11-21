@@ -1,5 +1,6 @@
 require "faker"
 puts "Wiping all players from the database..."
+PlayerGame.destroy_all
 Player.destroy_all
 
 puts "Generating 35 new players..."
@@ -13,21 +14,24 @@ puts "Generating 35 new players..."
   Player.create(name: name, description: description, address: address, gender: gender, email: email, password: '123456')
 end
 
-puts "Game generation Start."
+puts "Wiping all games from the database..."
+
 Game.destroy_all
+
+puts "Game generation Start."
 
 20.times do
   name = Faker::Game.title
   description = "#{Faker::Sports::Football.position}. #{Faker::Quote.mitch_hedberg}"
   address = Faker::Games::HalfLife.location
-  gender = %w[male female].sample
-  team_size = Random.new.rand(5..11)
-  pitch_identifier = "pitch number"
+  gender = %w[male female co-ed].sample
+  team_size = rand(5..11)
+  pitch_identifier = "Pitch #{rand(1..9)}"
   pitch_type =   %w[grass 3-G astroturf].sample
   starting_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2023-12-21', to: '2023-12-30')
   ending_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2024-1-01', to: '2024-2-01')
   schedule = IceCube::Schedule.new(now = Time.now)
-  schedule.add_recurrence_rule(IceCube::Rule.weekly.day([:saturday, :sunday].sample).hour_of_day(Random.new.rand(8..18)))
+  schedule.add_recurrence_rule(IceCube::Rule.weekly.day([:saturday, :sunday].sample).hour_of_day(rand(8..18)))
   recurring_rule = schedule.to_yaml
 
   Game.create(
@@ -45,3 +49,15 @@ Game.destroy_all
   )
 end
 puts "Game generation complete."
+
+puts "Populating each game with a random number of players..."
+
+Game.all.each do |game|
+  capacity = (game.team_size * 2) - 1
+  players = (Player.all - [game.player]).shuffle
+  rand(0..capacity).times do |index, player_game|
+    PlayerGame.create(game_id: game.id, player_id: players[index].id)
+  end
+end
+
+puts "Game population complete."

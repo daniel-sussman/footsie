@@ -27,6 +27,8 @@
   %>
 <% elsif @status == "full" %>
   <p>This game is currently full.</p>
+<% elsif @status == "wrong_gender" %>
+  <p>Sorry, this game is for <%= @game.gender %>s only.</p>
 <% else %>
   <%=
     link_to "Join this game",
@@ -34,3 +36,11 @@
     data: {turbo_method: :post}
   %>
 <% end %>
+
+<h3>This game currently has <%= @players.count + 1 %> player<%= "s" if @players.count > 0 %>:</h3>
+<ul>
+  <li><%= @game.player.name %></li>
+  <% @players.each do |player| %>
+    <li><%= player.name %></li>
+  <% end %>
+</ul>

@@ -9,6 +9,18 @@ class Player < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_one_attached :photo
 
+  before_destroy :remove_from_games
+
+  private
+
+  def remove_from_games
+    Game.where("player_id = #{self.id}").destroy_all
+    Game.all.each do |game|
+      game.players.delete(self)
+    end
+    PlayerGame.where("player_id = #{self.id}").destroy_all
+  end
+
   validates :name, :address, presence: true
   validates :gender, presence: true, inclusion: { in: %w[male female] }
 end

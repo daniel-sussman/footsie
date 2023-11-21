@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :players
   get 'games/index'
   get 'games/show'
   get 'games/new'

@@ -42,4 +42,16 @@ class GamesController < ApplicationController
   def game_params
     params.require(:game).permit(:description, :gender, :team_size, :pitch_identifier, :pitch_type, :address, :starting_date, :ending_date, :recurring_rule)
   end
+
+  def schedule_to_yaml(game, schedule)
+    game.recurring_rule = schedule.to_yaml
+  end
+
+  def yaml_to_schedule(game)
+    hash = Psych.safe_load(game.recurring_rule, permitted_classes: [Time, Symbol])
+    IceCube::Schedule.from_hash(hash)
+  end
 end
+
+# IceCube::Schedule.new(now = Time.now)
+# schedule.add_recurrence_rule(IceCube::Rule.weekly.day(:saturday).hour_of_day(10, 11))

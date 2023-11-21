@@ -15,11 +15,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_20_160829) do
   enable_extension "plpgsql"
 
   create_table "games", force: :cascade do |t|
+    t.string "name"
     t.text "description"
+    t.float "price", default: 0.0
     t.string "gender"
     t.integer "team_size"
     t.string "pitch_identifier"
     t.string "pitch_type"
+    t.boolean "indoor", default: false
     t.string "address"
     t.date "starting_date"
     t.date "ending_date"

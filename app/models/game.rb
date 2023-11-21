@@ -8,7 +8,7 @@ class Game < ApplicationRecord
   validates :address, presence: true
   validates :gender, acceptance: { accept: ['male', 'female'] }
   validates :team_size, numericality: { only_integer: true, greater_than_or_equal_to: 5, less_than_or_equal_to: 11 }
-  validates :pitch_type, presence: true
+  validates :pitch_type, presence: true, inclusion: { in: %w[grass 3-G astroturf] }
   validates :starting_date, presence: true
   validates :ending_date, comparison: { greater_than: :starting_date }
   validates :recurring_rule, presence: true

@@ -11,7 +11,7 @@
 <p>Pitch type: <%= @game.pitch_type %></p>
 <p>Pitch address: <%= @game.address %></p>
 
-<%# <%= link_to "Join",
+<%= link_to "Join",
     game_player_games_path(@game),
     data: {turbo_method: :post} %>
 
@@ -20,6 +20,6 @@
     game_player_games_path(@game),
     data: {turbo_method: :post} %>
 <%= link_to "Delete",
-  game_path(@game),
+  game_player_games_path(@game),
   data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
 %>

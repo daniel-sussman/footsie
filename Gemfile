@@ -53,10 +53,12 @@ gem "devise"
 gem "ice_cube"
 gem "faker"
 gem "activesupport"
+gem "cloudinary"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem "dotenv-rails"
 end
 
 group :development do

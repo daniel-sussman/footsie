@@ -1,1 +1,28 @@
-<h1>Games#index</h1>
+<div class="container">
+  <div class="row ">
+    <div class="col-md-12 mt-2 ">
+      <article class="mt-3">
+        <h1>Games#index</h1>
+        <p>Find me in app/views/games/index.html.erb</p>
+        <h1> games List </h1>
+      </article>
+      <div class="row">
+        <% @games.each do |game| %>
+          <div class="col-md-3">
+            <h2>Game id : <%= game.id %></h2>
+            <p>Description : <%= game.description %></p>
+            <p>Gender: <%= game.gender %></p>
+            <p>Team_size : <%= game.team_size %></p>
+            <p>Pitch_identifier : <%= game.pitch_identifier %></p>
+            <p>Pitch_type : <%= game.pitch_type %></p>
+            <p>Address : <%= game.address %></p>
+            <p>Starting_date: <%= game.starting_date %></p>
+            <p>Ending_date : <%= game.ending_date %></p>
+            <p>Recurring_rule : <%= game.recurring_rule %></p>
+            <p>Player_id : <%= game.player_id %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

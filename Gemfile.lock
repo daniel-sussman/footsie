@@ -124,6 +124,8 @@ GEM
     error_highlight (0.5.1)
     erubi (1.12.0)
     execjs (2.9.1)
+    faker (3.2.1)
+      i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
     font-awesome-sass (6.4.2)
       sassc (~> 2.0)
@@ -131,6 +133,7 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    ice_cube (0.16.4)
     importmap-rails (1.2.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -283,6 +286,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activesupport
   autoprefixer-rails
   bootsnap
   bootstrap (~> 5.2)
@@ -290,7 +294,9 @@ DEPENDENCIES
   debug
   devise
   error_highlight (>= 0.4.0)
+  faker
   font-awesome-sass (~> 6.1)
+  ice_cube
   importmap-rails
   jbuilder
   pg (~> 1.1)

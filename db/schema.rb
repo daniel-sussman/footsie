@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_20_160829) do
     t.string "address"
     t.date "starting_date"
     t.date "ending_date"
-    t.string "recurring_rule"
+    t.text "recurring_rule"
     t.bigint "player_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,7 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_20_160829) do
   create_table "player_games", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.bigint "player_id", null: false
-    t.boolean "active"
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_player_games_on_game_id"

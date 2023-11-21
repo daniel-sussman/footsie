@@ -41,6 +41,7 @@ class GamesController < ApplicationController
 
   def game_params
     params.require(:game).permit(:name, :description, :price, :gender, :team_size, :pitch_identifier, :pitch_type, :indoor, :address, :starting_date, :ending_date, :recurring_rule)
+    params.require(:game).permit(:name, :description, :price, :gender, :team_size, :pitch_identifier, :pitch_type, :address, :starting_date, :ending_date, :recurring_rule)
   end
 
   def schedule_to_yaml(game, schedule)

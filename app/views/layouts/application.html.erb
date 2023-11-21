@@ -10,6 +10,22 @@
     <%= javascript_importmap_tags %>
   </head>
 
+  <nav class="d-flex justify-content-between container">
+    <div class="logo"><p>LOGO</p></div>
+    <div class="d-flex justify-content-evenly">
+      <%= link_to "Browse games", games_path %>
+      &nbsp
+      <% if player_signed_in? %>
+        <%= link_to "My profile", player_path(current_player) %>
+        &nbsp
+        <%= link_to "Log out", destroy_player_session_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?"} %>
+      <% else %>
+        <%= link_to "Sign in / Sign up", new_player_session_path %>
+      <% end %>
+
+    </div>
+  </nav>
+
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

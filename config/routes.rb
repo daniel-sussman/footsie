@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "games#index"
   resources :games do
-    resources :player_games, only: [:create, :destroy]
+    resources :player_games, only: [:create]
   end
   resources :players, only: [:show, :new, :create]
-  resources :player_games, only: [:leave]
+  resources :player_games, only: [:update]
 end

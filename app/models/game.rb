@@ -1,8 +1,9 @@
 class Game < ApplicationRecord
   # Check Player id from player table
   belongs_to :player
-  has_many :player_games
+  has_many :player_games, dependent: :destroy
   has_many :players, through: :player_games
+  has_many :reviews, dependent: :destroy
   has_one_attached :photo
 
   # Add Validation table field base role

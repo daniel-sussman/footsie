@@ -1,12 +1,20 @@
 class GamesController < ApplicationController
   before_action :set_game, only: %i[new show create edit destroy]
-  # skip_before_action :authenticate_user!, only: :root
+  skip_before_action :authenticate_player!, only: %i[index show]
 
   def index
     @games = Game.all
   end
 
   def show
+    @game = Game.find(params[:id])
+    if player_signed_in?
+      @player = current_player
+      @player_game = PlayerGame.where("game_id = #{@game.id} AND player_id = #{@player.id}").last
+      @status = fetch_player_status
+    else
+      @status = "login"
+    end
   end
 
   def new
@@ -43,6 +51,18 @@ class GamesController < ApplicationController
 
   def game_params
     params.require(:game).permit(:name, :description, :price, :gender, :team_size, :pitch_identifier, :pitch_type, :indoor, :address, :starting_date, :ending_date, :recurring_rule, :photo)
+  end
+
+  def fetch_player_status
+    if @game.player == @player
+      "owner"
+    elsif @game.players.include?(@player) && @player_game.active
+      "member"
+    elsif @game.players.size >= ((@game.team_size * 2) - 1)
+      "full"
+    else
+      "join"
+    end
   end
 
   def schedule_to_yaml(game, schedule)

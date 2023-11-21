@@ -52,6 +52,7 @@ gem "sassc-rails"
 gem "devise"
 gem "ice_cube"
 gem "faker"
+gem "cloudinary"
 gem "activesupport"
 gem "cloudinary"
 

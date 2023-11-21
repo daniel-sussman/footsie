@@ -3,6 +3,8 @@ class Game < ApplicationRecord
   belongs_to :player
   has_many :player_games
   has_many :players, through: :player_games
+  has_one_attached :photo
+
   # Add Validation table field base role
   validates :description, presence: true
   validates :address, presence: true

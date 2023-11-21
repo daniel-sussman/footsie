@@ -1,12 +1,12 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[new create edit destroy]
+  before_action :set_game, only: %i[new show create edit destroy]
 
   def index
     @games = Game.all
   end
 
   def show
-
+    @games = Game.find(params[:id])
   end
 
   def new
@@ -36,7 +36,7 @@ class GamesController < ApplicationController
   private
 
   def set_game
-    @game = Game.find(params[:game_id])
+    @game = Game.find(params[:id])
   end
 
   def game_params

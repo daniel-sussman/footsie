@@ -1,6 +1,7 @@
 class PlayersController < ApplicationController
   def show
     @player = Player.find(params[:id])
+    @player_games = PlayerGame.where("player_id = #{@player.id} AND active = true")
   end
 
   def new

@@ -1,11 +1,14 @@
 class CreateGames < ActiveRecord::Migration[7.1]
   def change
     create_table :games do |t|
+      t.string :name
       t.text :description
+      t.float :price, default: 0.0
       t.string :gender
       t.integer :team_size
       t.string :pitch_identifier
       t.string :pitch_type
+      t.boolean :indoor, default: false
       t.string :address
       t.date :starting_date
       t.date :ending_date

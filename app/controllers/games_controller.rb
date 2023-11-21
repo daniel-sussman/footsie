@@ -6,7 +6,6 @@ class GamesController < ApplicationController
   end
 
   def show
-    @games = Game.find(params[:id])
   end
 
   def new
@@ -26,6 +25,8 @@ class GamesController < ApplicationController
   end
 
   def update
+    @game.update(game_params)
+    redirect_to game_path(@game)
   end
 
   def destroy

@@ -58,7 +58,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_21_144806) do
     t.bigint "player_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title"
     t.index ["player_id"], name: "index_games_on_player_id"
   end
 

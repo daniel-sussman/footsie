@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :set_game, only: %i[new show create edit destroy]
+  # skip_before_action :authenticate_user!, only: :root
 
   def index
     @games = Game.all

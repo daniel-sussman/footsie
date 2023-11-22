@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[show create edit destroy]
+  before_action :set_game, only: %i[show edit destroy]
   skip_before_action :authenticate_player!, only: %i[index show]
 
   def index
@@ -25,7 +25,8 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
-    if @game.save
+    @game.player = current_player
+    if @game.save!
       redirect_to game_path(@game)
     else
       render :new, status: :unprocessable_entity

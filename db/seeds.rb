@@ -24,17 +24,17 @@ puts "Game generation Start."
   name = Faker::Sports::Football.competition
   description = "#{Faker::Sports::Football.coach}#{Faker::Sports::Football.position}. #{Faker::Quote.mitch_hedberg}"
   address = Faker::Travel::TrainStation.name(region: 'united_kingdom', type: 'metro')
-  gender = %w[Male Female Co-ed].sample
+  gender = %w[male female co-ed].sample
   team_size = rand(5..11)
   pitch_identifier = "Pitch #{rand(1..9)}"
-  pitch_type = %w[Grass 3G Astroturf].sample
+  pitch_type = %w[grass 3-G astroturf].sample
   starting_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2023-12-21', to: '2023-12-30')
   ending_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2024-1-01', to: '2024-2-01')
   schedule = IceCube::Schedule.new(now = Time.now)
   schedule.add_recurrence_rule(IceCube::Rule.weekly.day([:saturday, :sunday].sample).hour_of_day(rand(8..18)))
   recurring_rule = schedule.to_yaml
 
-  Game.create(
+  Game.create!(
     name: name,
     description: description,
     address: address,

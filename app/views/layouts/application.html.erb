@@ -19,6 +19,9 @@
           </div>
           <% if player_signed_in? %>
             <div class="nav-button">
+              <%= link_to "Create a new game", new_game_path %>
+            </div>
+            <div class="nav-button">
               <%= link_to "My Profile", player_path(current_player) %>
             </div>
             <div class="nav-button">

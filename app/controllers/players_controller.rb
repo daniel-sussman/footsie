@@ -4,7 +4,9 @@ class PlayersController < ApplicationController
       redirect_to games_path
     else
       @player = Player.find(params[:id])
+      @host_games = Game.where("player_id = #{@player.id}")
       @player_games = PlayerGame.where("player_id = #{@player.id} AND active = true")
+      @past_games = PlayerGame.where("player_id = #{@player.id} AND active = false")
     end
   end
 

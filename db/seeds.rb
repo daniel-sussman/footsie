@@ -21,13 +21,13 @@ Game.destroy_all
 puts "Game generation Start."
 
 20.times do
-  name = Faker::Game.title
-  description = "#{Faker::Sports::Football.position}. #{Faker::Quote.mitch_hedberg}"
-  address = Faker::Games::HalfLife.location
-  gender = %w[male female co-ed].sample
+  name = Faker::Sports::Football.competition
+  description = "#{Faker::Sports::Football.coach}#{Faker::Sports::Football.position}. #{Faker::Quote.mitch_hedberg}"
+  address = Faker::Travel::TrainStation.name(region: 'united_kingdom', type: 'metro')
+  gender = %w[Male Female Co-ed].sample
   team_size = rand(5..11)
   pitch_identifier = "Pitch #{rand(1..9)}"
-  pitch_type =   %w[grass 3-G astroturf].sample
+  pitch_type = %w[Grass 3G Astroturf].sample
   starting_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2023-12-21', to: '2023-12-30')
   ending_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2024-1-01', to: '2024-2-01')
   schedule = IceCube::Schedule.new(now = Time.now)

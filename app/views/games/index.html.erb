@@ -1,9 +1,13 @@
+<div class="hero-image">
+  <div class="hero-text">
+    <h1>Footsie</h1>
+    <h3>Find your squad for casual football fun!</h3>
+    <button class="btn btn-primary">Enter your postcode</button>
+  </div>
+</div>
 <div class="container">
   <div class="row ">
     <div class="col-md-12 mt-2 ">
-      <article class="mt-3">
-        <h1>All Games</h1>
-      </article>
       <div class="row">
         <% @games.each do |game| %>
           <div class="col-md-3" style="color: <%= @open_games.include?(game) ? 'green' : 'red' %>;">

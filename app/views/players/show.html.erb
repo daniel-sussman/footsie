@@ -1,0 +1,19 @@
+<h1>Player Show</h1>
+<ul>
+    <% if @player_games.size > 0 %>
+      <% light = "🟢"%>
+    <% else %>
+      <% light = "🔴"%>
+    <% end%>
+    <li>
+      <%= "#{@player.name} #{light}" %>
+    </li>
+    <li>
+      <%= @player.gender %>
+    </li>
+    <li>
+      <%= @player.description %>
+    </li>
+</ul>
+
+<%# We need to add players' photo %>

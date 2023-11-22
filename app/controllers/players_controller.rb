@@ -1,6 +1,11 @@
 class PlayersController < ApplicationController
   def show
-    @player = Player.find(params[:id])
+    if params[:id] == "sign_out"
+      redirect_to games_path
+    else
+      @player = Player.find(params[:id])
+      @player_games = PlayerGame.where("player_id = #{@player.id} AND active = true")
+    end
   end
 
   def new
@@ -10,7 +15,7 @@ class PlayersController < ApplicationController
   def create
     @player = Player.new(player_params)
     if @player.save
-      redirect_do games_path
+      redirect_to games_path
     else
       render :games, status: :unprocessable_entity
     end
@@ -19,6 +24,6 @@ class PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:name, :gender, :address)
+    params.require(:player).permit(:name, :gender, :address, :photo)
   end
 end

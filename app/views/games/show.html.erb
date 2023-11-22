@@ -1,2 +1,46 @@
-<h1>Games#show</h1>
-<p>Find me in app/views/games/show.html.erb</p>
+<h1><%= @game.name %></h1>
+
+<p><%= @game.description %></p>
+<p>Price per person: £<%=@game.price %></p>
+<p>Gender: <%= @game.gender %></p>
+<p>Match time & date: <%= @game.starting_date %></p>
+<p>Maximum players: <%= 2 * @game.team_size %></p>
+
+<h3>Location</h3>
+<p>Pitch ID: <%= @game.pitch_identifier %></p>
+<p>Pitch type: <%= @game.pitch_type %></p>
+<p>Pitch address: <%= @game.address %></p>
+
+<p><strong>STATUS: <%= @status %></strong></p>
+
+<% if @status == "owner" %>
+  <%=
+    link_to "This is your game. Would you like to delete it?",
+    game_path(@game),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+  %>
+<% elsif @status == "member" %>
+  <%=
+    link_to "Leave this game?",
+    player_game_path(@player_game),
+    data: {turbo_method: :patch, turbo_confirm: "Are you sure you want to leave the game #{@game.name}?"}
+  %>
+<% elsif @status == "full" %>
+  <p>This game is currently full.</p>
+<% elsif @status == "wrong_gender" %>
+  <p>Sorry, this game is for <%= @game.gender %>s only.</p>
+<% else %>
+  <%=
+    link_to "Join this game",
+    game_player_games_path(@game),
+    data: {turbo_method: :post}
+  %>
+<% end %>
+
+<h3>This game currently has <%= @players.count + 1 %> player<%= "s" if @players.count > 0 %>:</h3>
+<ul>
+  <li><%= @game.player.name %></li>
+  <% @players.each do |player| %>
+    <li><%= player.name %></li>
+  <% end %>
+</ul>

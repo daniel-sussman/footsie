@@ -1,6 +1,6 @@
 <div class="row m-5">
   <h1><%= @game.name %></h1>
-  <div class="col-7">
+  <div class="col-7 cards">
     <div class="card1">
       <h3>Location</h3>
       <p>Pitch ID: <%= @game.pitch_identifier %></p>
@@ -16,7 +16,7 @@
       <p>Maximum players: <%= 2 * @game.team_size %></p>
     </div>
   </div>
-  <div class="col-5">
+  <div class="col-5 cards">
     <div class="card1">
       <p><strong>STATUS: <%= @status %></strong></p>
 

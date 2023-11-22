@@ -1,19 +1,24 @@
-<h1>Player Show</h1>
-<ul>
-    <% if @player_games.size > 0 %>
-      <% light = "🟢"%>
-    <% else %>
-      <% light = "🔴"%>
-    <% end%>
-    <li>
-      <%= "#{@player.name} #{light}" %>
-    </li>
-    <li>
-      <%= @player.gender %>
-    </li>
-    <li>
-      <%= @player.description %>
-    </li>
-</ul>
+<div class="container">
+  <h1>My profile</h1>
+  <ul>
+      <% if @player_games.size > 0 %>
+        <% light = "🟢"%>
+      <% else %>
+        <% light = "🔴"%>
+      <% end%>
+      <li>
+        <%= "#{@player.name} #{light}" %>
+      </li>
+      <li>
+        <%= @player.gender %>
+      </li>
+      <li>
+        <%= @player.description %>
+      </li>
+  </ul>
+
+  <%= link_to "Edit my profile", edit_player_registration_path(@player) %>
+</div>
+
 
 <%# We need to add players' photo %>

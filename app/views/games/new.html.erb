@@ -1,2 +1,22 @@
-<h1>Games#new</h1>
-<p>Find me in app/views/games/new.html.erb</p>
+<p>Todo.... Footsie Form</p>
+
+
+<%= simple_form_for(@game) do |form| %>
+  <%= form.input :name %>
+  <%= form.input :address %>
+  <%= form.input :description %>
+  <%= form.input :pitch_identifier %>
+  <%= form.input :pitch_type %>
+  <%= form.input :starting_date %>
+  <%= form.input :ending_date %>
+  <%= form.input :team_size %>
+  <%= form.input :gender %>
+  <%= form.input :recurring_rule %>
+  <%= form.input :indoor %>
+  <%= form.input :price %>
+  <%# <div class="mb-3 currency optional game_price">
+  <label class="form-label currency optional" for="game_price">Price</label>£
+   <input class="form-control currency optional" type="text" name="game[price]" id="game_price">
+   </div> %>
+  <%= form.submit 'Host a game', class: 'btn btn-primary'%>
+<% end %>

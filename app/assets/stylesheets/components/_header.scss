@@ -1,21 +1,38 @@
-body, html {
-  height: 100%;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-.hero-image {
-background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1509077613385-f89402467146");
-height: 50%;
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
-position: relative;
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.logo {
+  margin-bottom: 20px;
 }
 
 .hero-text {
-text-align: center;
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-color: white;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.search-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  margin-right: 5px;
 }

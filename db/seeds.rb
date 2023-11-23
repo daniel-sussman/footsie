@@ -34,7 +34,7 @@ puts "Game generation Start."
   schedule.add_recurrence_rule(IceCube::Rule.weekly.day([:saturday, :sunday].sample).hour_of_day(rand(8..18)))
   recurring_rule = schedule.to_yaml
 
-  Game.create!(
+  new_game = Game.create!(
     name: name,
     description: description,
     address: address,
@@ -48,6 +48,7 @@ puts "Game generation Start."
     player_id: Player.all.sample.id
   )
 end
+
 puts "Game generation complete."
 
 puts "Populating each game with a random number of players..."

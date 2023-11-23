@@ -13,7 +13,11 @@
 
   <body>
       <div class="nav-container d-flex justify-content-between align-items-center">
-        <div class="logo"><i class="fa-solid fa-futbol" style="color: #f8eede;"></i></div>
+        <div class="logo">
+          <%= link_to root_path do %>
+          <i class="fa-solid fa-futbol fa-xl" style="color: #f8eede"></i>
+        <% end %>
+        </div>
         <div class="nav">
           <div class="nav-button">
             <%= link_to "BROWSE GAMES", games_path %>

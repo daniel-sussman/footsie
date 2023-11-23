@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get :search
     end
     resources :player_games, only: [:create]
+    resources :reviews, only: [:new, :create]
   end
   resources :players, only: [:show, :new, :create]
   resources :player_games, only: [:update]

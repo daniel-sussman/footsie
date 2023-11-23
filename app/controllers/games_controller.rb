@@ -23,6 +23,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @review = Review.new
     @players = @game.players.select{ |player| PlayerGame.find_by(game_id: @game.id, player_id: player.id).active }
     if player_signed_in?
       @player = current_player

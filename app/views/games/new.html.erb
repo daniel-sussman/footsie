@@ -15,9 +15,5 @@
   <%= f.input :gender, collection: ["male", "female", "co-ed"] %>
   <%= f.input :indoor %>
   <%= f.input :photo, as: :file, label: "Upload an image (optional)" %>
-  <%# <div class="mb-3 currency optional game_price">
-  <label class="form-label currency optional" for="game_price">Price</label>£
-   <input class="form-control currency optional" type="text" name="game[price]" id="game_price">
-   </div> %>
   <%= f.submit 'Host this game', class: 'btn btn-primary'%>
 <% end %>

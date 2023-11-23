@@ -24,13 +24,21 @@
         </div>
         <% if player_signed_in? %>
           <div class="nav-button">
-            <%= link_to "CREATE NEW GAME", new_game_path %>
+            <%= link_to "FIND A GAME NEAR ME", "#{search_games_path}?query=#{current_player.address}" %>
           </div>
           <div class="nav-button">
-            <%= link_to "MY PROFILE", player_path(current_player) %>
+            <%= link_to "HOST A GAME", new_game_path %>
           </div>
           <div class="nav-button">
-            <%= link_to "LOG OUT", destroy_player_session_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?"} %>
+            <% if current_player.photo.present? %>
+              <%= link_to player_path(current_player) do %>
+                <%= cl_image_tag current_player.photo.key, crop: :fill %>
+              <% end %>
+            <% else %>
+              <%= link_to "MY PROFILE", player_path(current_player) %>
+            <% end %>
+          </div>
+
           </div>
         <% else %>
           <div class="nav-button">

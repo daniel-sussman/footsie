@@ -28,6 +28,12 @@ $nav-font-color: $off-white;
   color: $nav-font-color;
   margin: 0 auto;
   padding: 0 24px;
+  img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid $orange
+  }
 }
 
 .spacer {

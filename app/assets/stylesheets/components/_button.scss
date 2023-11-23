@@ -1,0 +1,46 @@
+.button1 {
+  background-color: $orange;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  transition: ease 1s;
+    a {
+      font-size: 16px;
+      font-family: $body-font;
+      color: $off-white;
+  }
+}
+
+.button1:hover {
+  background-color: $off-white;
+  border: 1px solid $orange;
+    a {
+      color: $orange;
+    }
+}
+
+.button2 {
+  background-color: $white;
+  border: 1px solid $navy-blue;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  transition: ease 1s;
+    a {
+      font-size: 16px;
+      font-family: $body-font;
+      color: $navy-blue;
+  }
+}
+
+.button2:hover {
+  background-color: $navy-blue;
+    a {
+      color: $white;
+    }
+}

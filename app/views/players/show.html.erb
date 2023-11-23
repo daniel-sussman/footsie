@@ -1,19 +1,65 @@
-<h1>Player Show</h1>
-<ul>
-    <% if @player_games.size > 0 %>
-      <% light = "🟢"%>
+<div class="container">
+  <div class="d-flex p-2">
+    <h1>My profile</h1>
+    <% if @player.photo.present? %>
+      <%= cl_image_tag @player.photo.key, crop: :fill %>
     <% else %>
-      <% light = "🔴"%>
-    <% end%>
-    <li>
-      <%= "#{@player.name} #{light}" %>
-    </li>
-    <li>
-      <%= @player.gender %>
-    </li>
-    <li>
-      <%= @player.description %>
-    </li>
-</ul>
+      <%= image_tag "football_#{%w[green red blue purple orange teal][@player.id % 6]}.png" %>
+    <% end %>
+    <ul>
+        <% if @player_games.size > 0 %>
+          <% light = "🟢"%>
+        <% else %>
+          <% light = "🔴"%>
+        <% end%>
+        <li>
+          <%= "#{@player.name} #{light}" %>
+        </li>
+        <li>
+          <%= @player.gender %>
+        </li>
+        <li>
+          <%= @player.description %>
+        </li>
+    </ul>
+    <h2>My games:</h2>
+    <% if @player_games.size > 0%>
+      <ul>
+          <% if @host_games.size > 0 %>
+            <% @host_games.each do |game| %>
+              <li>
+                <%= link_to game.name, game_path(game) %>
+                <p>I am the host of this game</p>
+              </li>
+            <% end %>
+          <% end %>
+        <% @player_games.each do |player_game| %>
+          <% game = player_game.game %>
+          <li>
+            <%= link_to player_game.game.name, game_path(game) %>
+            <p>Leave a review</p>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>You haven't joined any games.</p>
+      <%= link_to "Find a game to join!", games_path %>
+    <% end %>
+    <% if @past_games.size > 0 %>
+      <h3>Finished games:</h3>
+      <ul>
+        <% @past_games.each do |player_game| %>
+          <% game = player_game.game %>
+          <li>
+            <%= link_to player_game.game.name, game_path(game) %>
+            <p>Leave a review</p>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <%= link_to "Edit my profile", edit_player_registration_path(@player) %>
+  </div>
+</div>
+
 
 <%# We need to add players' photo %>

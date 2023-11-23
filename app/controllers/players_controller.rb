@@ -3,8 +3,10 @@ class PlayersController < ApplicationController
     if params[:id] == "sign_out"
       redirect_to games_path
     else
-      @player = Player.find(params[:id])
+      @player = current_player
+      @host_games = Game.where("player_id = #{@player.id}")
       @player_games = PlayerGame.where("player_id = #{@player.id} AND active = true")
+      @past_games = PlayerGame.where("player_id = #{@player.id} AND active = false")
     end
   end
 
@@ -12,14 +14,15 @@ class PlayersController < ApplicationController
     @player = Player.new
   end
 
-  def create
-    @player = Player.new(player_params)
-    if @player.save
-      redirect_to games_path
-    else
-      render :games, status: :unprocessable_entity
-    end
-  end
+  # def create
+  #   @player = Player.new(player_params)
+  #   if @player.save
+  #     raise
+  #     redirect_to games_path
+  #   else
+  #     render :games, status: :unprocessable_entity
+  #   end
+  # end
 
   private
 

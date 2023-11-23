@@ -8,29 +8,54 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
   </head>
 
-  <nav class="d-flex justify-content-between container">
-    <div class="logo"><p>LOGO</p></div>
-    <div class="d-flex justify-content-evenly">
-      <%= link_to "Browse games", games_path %>
-      &nbsp
-      <% if player_signed_in? %>
-        <%= link_to "Find a game near me", player_path(current_player) %>
-        &nbsp
-        <%= link_to "My profile", player_path(current_player) %>
-        &nbsp
-        <%= link_to "Log out", destroy_player_session_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?"} %>
-      <% else %>
-        <%= link_to "Sign in / Sign up", new_player_session_path %>
-      <% end %>
-
-    </div>
-  </nav>
-
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div class="nav-container d-flex justify-content-between align-items-center">
+      <div class="logo">
+        <%= link_to root_path do %>
+          <i class="fa-solid fa-futbol fa-xl" style="color: #f8eede"></i>
+        <% end %>
+      </div>
+      <div class="nav">
+        <div class="nav-button">
+          <%= link_to "BROWSE GAMES", games_path %>
+        </div>
+        <% if player_signed_in? %>
+          <div class="nav-button">
+            <%= link_to "FIND A GAME NEAR ME", "#{search_games_path}?query=#{current_player.address}" %>
+          </div>
+          <div class="nav-button">
+            <%= link_to "HOST A GAME", new_game_path %>
+          </div>
+          <div class="nav-button">
+            <% if current_player.photo.present? %>
+              <%= link_to player_path(current_player) do %>
+                <%= cl_image_tag current_player.photo.key, crop: :fill %>
+              <% end %>
+            <% else %>
+              <%= link_to "MY PROFILE", player_path(current_player) %>
+            <% end %>
+          </div>
+
+          </div>
+        <% else %>
+          <div class="nav-button">
+            <%= link_to "SIGN IN / SIGN UP", new_player_session_path %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="spacer">
+      &nbsp
+    </div>
+
+    <div class="devise-alert">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
     <%= yield %>
   </body>
 </html>

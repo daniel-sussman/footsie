@@ -1,0 +1,15 @@
+.card {
+  width: 100%;
+  overflow: hidden;
+  margin: 100px auto;
+  transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+  color: $navy-blue
+}
+
+.box img {
+  width: 100%;
+}
+
+ul{
+  list-style: none;
+}

@@ -79,6 +79,6 @@ test:
 #
 production:
   <<: *default
-  database: rbnb_production
-  username: rbnb
-  password: <%= ENV["RBNB_DATABASE_PASSWORD"] %>
+  database: footsie_production
+  username: footsie
+  password: <%= ENV["FOOTSIE_DATABASE_PASSWORD"] %>

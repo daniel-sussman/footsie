@@ -1,0 +1,12 @@
+<div class="d-flex" style="overflow: hidden;">
+  <div>
+    <%= render "games/boxes_container" %>
+  </div>
+  <div class="map-container"
+    data-controller="map"
+    data-map-pos-value="<%= @coords.reverse %>"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+  >
+  </div>
+</div>

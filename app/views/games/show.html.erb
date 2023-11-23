@@ -32,12 +32,22 @@
     <div class="card">
       <h3>Team Tiger</h3>
       <h4>This game currently has <%= @players.count + 1 %> player<%= "s" if @players.count > 0 %>:</h4>
+
       <ul>
-        <li><%= @game.player.name %></li>
-        <% @players.each do |player| %>
-          <li><%= player.name %></li>
-        <% end %>
+        <li>
+          <% @game.reviews.each do |review| %>
+            <% review.rating.to_i.times do %>
+              <%= "⭐️" %>
+            <% end %>
+            <%= review.comment %>
+          <% end %>
+        </li>
       </ul>
+      <% if @status == "owner" %>
+        <p><%= "You cannot write the review on your game" %></p>
+      <% else %>
+        <%= render "new-review"%>
+      <% end %>
     </div>
   </div>
   <div class="col-6 cards">
@@ -70,6 +80,7 @@
     </div>
   </div>
 </div>
+
 <div class="row m-0">
   <div class="card">
     <h3>Reviews</h3>

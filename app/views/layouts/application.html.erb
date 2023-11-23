@@ -12,38 +12,42 @@
   </head>
 
   <body>
-      <div class="nav-container d-flex justify-content-between align-items-center">
-        <div class="logo">
-          <%= link_to root_path do %>
+    <div class="nav-container d-flex justify-content-between align-items-center">
+      <div class="logo">
+        <%= link_to root_path do %>
           <i class="fa-solid fa-futbol fa-xl" style="color: #f8eede"></i>
         <% end %>
+      </div>
+      <div class="nav">
+        <div class="nav-button">
+          <%= link_to "BROWSE GAMES", games_path %>
         </div>
-        <div class="nav">
+        <% if player_signed_in? %>
           <div class="nav-button">
-            <%= link_to "BROWSE GAMES", games_path %>
+            <%= link_to "CREATE NEW GAME", new_game_path %>
           </div>
-          <% if player_signed_in? %>
-            <div class="nav-button">
-              <%= link_to "CREATE NEW GAME", new_game_path %>
-            </div>
-            <div class="nav-button">
-              <%= link_to "MY PROFILE", player_path(current_player) %>
-            </div>
-            <div class="nav-button">
-             <%= link_to "LOG OUT", destroy_player_session_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?"} %>
-            </div>
-          <% else %>
-            <div class="nav-button">
-              <%= link_to "SIGN IN / SIGN UP", new_player_session_path %>
-            </div>
-          <% end %>
+          <div class="nav-button">
+            <%= link_to "MY PROFILE", player_path(current_player) %>
           </div>
-        </div>
+          <div class="nav-button">
+            <%= link_to "LOG OUT", destroy_player_session_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?"} %>
+          </div>
+        <% else %>
+          <div class="nav-button">
+            <%= link_to "SIGN IN / SIGN UP", new_player_session_path %>
+          </div>
+        <% end %>
       </div>
-      <div class="devise-alert">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-      </div>
+    </div>
+
+    <div class="spacer">
+      &nbsp
+    </div>
+
+    <div class="devise-alert">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,10 @@
+<% if @open_games.include?(game) %>
+  <% if player_signed_in? && ( game.player == current_player || game.players.include?(current_player) ) %>
+    <h5 class="link-orange"><%= link_to game.name, game_path(game) %></h5>
+  <% else %>
+    <h5 class="link-blue"><%= link_to game.name, game_path(game) %></h5>
+  <% end %>
+<% else %>
+  <h5 class="link-grey"><%= link_to game.name, game_path(game) %></h5>
+<% end %>
+<p><%= game.address %></p>

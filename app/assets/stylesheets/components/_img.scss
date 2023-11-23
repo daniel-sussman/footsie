@@ -1,0 +1,13 @@
+.image{
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    position: relative;
+    background-size: contain;
+    background-position: center;
+  }
+  margin: 0;
+}

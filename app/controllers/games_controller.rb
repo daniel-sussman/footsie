@@ -23,6 +23,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @games = Game.all
     @review = Review.new
     @players = @game.players.select{ |player| PlayerGame.find_by(game_id: @game.id, player_id: player.id).active }
     if player_signed_in?
@@ -31,6 +32,13 @@ class GamesController < ApplicationController
       @status = fetch_player_status
     else
       @status = "login"
+    end
+    @open_games = @games.reject { |game| closed?(game) }
+    @markers = @games.geocoded.map do |game|
+      {
+        lat: game.latitude,
+        lng: game.longitude
+      }
     end
   end
 

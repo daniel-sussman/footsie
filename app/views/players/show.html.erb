@@ -1,5 +1,11 @@
 <div class="container">
   <h1>My profile</h1>
+
+  <% if @player.photo.present? %>
+    <%= cl_image_tag @player.photo.key, crop: :fill %>
+  <% else %>
+    <%= image_tag "football_#{%w[green red blue purple orange teal][@player.id % 6]}.png" %>
+  <% end %>
   <ul>
       <% if @player_games.size > 0 %>
         <% light = "🟢"%>

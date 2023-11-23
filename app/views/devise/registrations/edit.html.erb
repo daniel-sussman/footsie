@@ -46,6 +46,7 @@
       <%= f.input :address, required: true %>
       <%= f.input :gender, required: true %>
       <%= f.input :description %>
+      <%= f.input :photo, as: :file, label: "Upload a new image" %>
       <%= f.input :current_password,
                   hint: "we need your current password to confirm your changes",
                   required: true,

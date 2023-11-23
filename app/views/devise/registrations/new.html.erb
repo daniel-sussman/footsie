@@ -19,6 +19,7 @@
     <%= f.input :address, required: true %>
     <%= f.input :gender, required: true,  collection: ["male", "female"]%>
     <%= f.input :description %>
+    <%= f.input :photo, as: :file, label: "Upload an image (optional)" %>
   </div>
 
   <div class="form-actions">

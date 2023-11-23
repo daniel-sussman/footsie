@@ -18,17 +18,30 @@ body {
 }
 
 .logo {
-  margin-bottom: 20px;
+  margin: 0px;
+}
+
+.logo-hero {
+  margin: 40px;
 }
 
 .hero-text {
   font-size: 2em;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .search-container {
   max-width: 400px;
+  height: 40px;
   margin: 0 auto;
+  .button1 {
+    width: 200px;
+    padding: 0px;
+  }
+}
+
+.search-container > .field {
+  margin: 0px 24px;
 }
 
 input[type="text"] {

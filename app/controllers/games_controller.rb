@@ -8,6 +8,8 @@ class GamesController < ApplicationController
       .reject { |game| closed?(game) }
       .sort_by { |game| game.updated_at }
       .reverse
+      @open_games = @games.reject { |game| closed?(game) }
+
   end
 
   def search

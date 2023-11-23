@@ -2,7 +2,7 @@
   <% if @game.photo.present? %>
     <%= cl_image_tag @game.photo.key, crop: :fill %>
   <% else %>
-    <%= cl_image_tag "football_#{%w[green red blue purple orange teal][@game.id % 6]}.png" %>
+    <%= image_tag "football_#{%w[green red blue purple orange teal][@game.id % 6]}.png" %>
   <% end %>
 </div>
 <div class="row m-5">

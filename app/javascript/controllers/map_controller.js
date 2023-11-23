@@ -16,7 +16,7 @@ export default class extends Controller {
         container: this.element,
         style: "mapbox://styles/mapbox/streets-v10",
         center: this.posValue,
-        zoom: 13
+        zoom: 12
       })
     this.#addMarkersToMap()
     } else {
@@ -32,10 +32,14 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      // const mark = document.createElement('h1')
-      // mark.innerText = 'test'
-      new mapboxgl.Marker()
+      const popup = new mapboxgl.Popup().setHTML(marker.info_card_html)
+
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = marker.marker_html
+
+      new mapboxgl.Marker(customMarker)
         .setLngLat([ marker.lng, marker.lat ])
+        .setPopup(popup)
         .addTo(this.map)
     })
   }

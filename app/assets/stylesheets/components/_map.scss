@@ -6,3 +6,24 @@
   left: 60vw;
   border-left: 10px solid $navy-blue;
 }
+
+.mapboxgl-popup {
+  max-width: 50px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: $body-font;
+  a {
+    text-decoration: none;
+  }
+  h5.link-orange a {
+    color: $orange;
+  }
+  h5.link-blue a {
+    color: $navy-blue;
+  }
+  h5.link-grey a {
+    color: $grey;
+  }
+}

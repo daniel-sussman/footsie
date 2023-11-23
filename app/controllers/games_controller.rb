@@ -17,13 +17,16 @@ class GamesController < ApplicationController
       location = "#{params[:query]}, London, United Kingdom"
       results = Geocoder.search(location)
       @coords = results.first.coordinates
-      @markers = Game.all.geocoded.map do |game|
 
       @games = Game.all.sort_by { |g| g.distance_to(@coords)}
       @open_games = @games.reject { |g| closed?(g) }
+
+      @markers = Game.all.geocoded.map do |game|
         {
           lat: game.latitude,
-          lng: game.longitude
+          lng: game.longitude,
+          info_card_html: render_to_string(partial: "info_card", locals: { game: game }),
+          marker_html: render_to_string(partial: "marker_#{color_code(game)}")
         }
       end
     else
@@ -95,6 +98,12 @@ class GamesController < ApplicationController
     params.require(:game).permit(:name, :description, :price, :gender, :team_size, :pitch_identifier, :pitch_type, :indoor, :address, :starting_date, :ending_date, :recurring_rule, :photo)
   end
 
+  def active?(game)
+    return false unless player_signed_in?
+
+    game.player == current_player || game.players.include?(current_player)
+  end
+
   def closed?(game)
     if player_signed_in?
       full?(game) || wrong_gender?(game)
@@ -112,6 +121,16 @@ class GamesController < ApplicationController
 
   def wrong_gender?(game)
     game.gender != "co-ed" && game.gender != current_player.gender
+  end
+
+  def color_code(game)
+    if closed?(game)
+      "grey"
+    elsif active?(game)
+      "orange"
+    else
+      "blue"
+    end
   end
 
   def fetch_player_status

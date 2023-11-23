@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root "games#index"
   resources :games do
     resources :player_games, only: [:create]
+    resources :reviews, only: [:new, :create]
   end
   resources :players, only: [:show, :new, :create]
   resources :player_games, only: [:update]

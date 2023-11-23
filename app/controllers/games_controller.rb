@@ -1,10 +1,24 @@
 class GamesController < ApplicationController
   before_action :set_game, only: %i[show edit destroy]
-  skip_before_action :authenticate_player!, only: %i[index show]
+  skip_before_action :authenticate_player!, only: %i[index show search]
 
   def index
+    @games = Game
+      .all
+      .reject { |game| closed?(game) }
+      .sort_by { |game| game.updated_at }
+      .reverse
+  end
+
+  def search
     @games = Game.all
     @open_games = @games.reject { |game| closed?(game) }
+    @markers = @games.geocoded.map do |game|
+      {
+        lat: game.latitude,
+        lng: game.longitude
+      }
+    end
   end
 
   def show

@@ -14,7 +14,8 @@
             <% if game.photo.present? %>
               <%= cl_image_tag game.photo.key, crop: :fill %>
             <% else %>
-              <img class="img" src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="IMG">
+              <%= cl_image_tag "football_#{%w[green red blue purple orange teal][game.id % 6]}.png" %>
+              <%# <img class="img" src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="IMG"> %>
             <% end %>
             <h2><%= game.name %></h2>
             <p class="data">£<%= game.price %> per person</p>

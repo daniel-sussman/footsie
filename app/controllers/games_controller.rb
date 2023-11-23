@@ -13,13 +13,27 @@ class GamesController < ApplicationController
   end
 
   def search
-    @games = Game.all
-    @open_games = @games.reject { |game| closed?(game) }
-    @markers = @games.geocoded.map do |game|
-      {
-        lat: game.latitude,
-        lng: game.longitude
-      }
+    if params[:query].present?
+      location = "#{params[:query]}, London, United Kingdom"
+      results = Geocoder.search(location)
+      @coords = results.first.coordinates
+      @markers = Game.all.geocoded.map do |game|
+
+      @games = Game.all.sort_by { |g| g.distance_to(@coords)}
+      @open_games = @games.reject { |g| closed?(g) }
+        {
+          lat: game.latitude,
+          lng: game.longitude
+        }
+      end
+    else
+      @games = Game
+      .all
+      .reject { |game| closed?(game) }
+      .sort_by { |game| game.updated_at }
+      .reverse
+      @nono = true
+      render 'games/index'
     end
   end
 

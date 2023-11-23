@@ -1,10 +1,13 @@
 <div class="hero">
   <%= image_tag "footsie_logo.png", class:"logo-hero" %>
   <h3 class="hero-text">PLAY THE BEAUTIFUL GAME. <br>ANYWHERE. <br>ANYTIME.</h3>
-  <div class="d-flex search-container">
-      <input type="text" placeholder="Enter your postcode...">
-      <button class="button1" type="submit">Find a Game</button>
-  </div>
+  <form class="search-container" action='<%= search_games_path %>' method='get'>
+  <% if @nono%>
+  <h3 style='color: red;'>enter a goddamn query</h3>
+  <%end%>
+    <input type="text" name='query' placeholder="Enter your postcode...">
+    <input class="button1" type="submit" value='Find a Game'>
+  </form>
 </div>
 
 <%= render partial: "boxes_container", games: @games, open_games: @open_games %>

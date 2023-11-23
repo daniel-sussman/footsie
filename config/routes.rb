@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root "games#index"
   resources :games do
     collection do
+      post :index
       get :search
     end
     resources :player_games, only: [:create]

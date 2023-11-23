@@ -7,6 +7,9 @@ $nav-font-color: $off-white;
   background: $nav-background;
   margin: 0 auto;
   padding: 0 24px;
+  width: 100%;
+  position: fixed;
+  z-index: 5;
 }
 
 .nav {

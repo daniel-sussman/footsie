@@ -12,31 +12,33 @@
 
   <body>
       <div class="nav-container d-flex justify-content-between align-items-center">
-        <div class="logo"></div>
+        <div class="logo"><i class="fa-solid fa-futbol" style="color: #f8eede;"></i></div>
         <div class="nav">
           <div class="nav-button">
-            <%= link_to "Browse Games", games_path %>
+            <%= link_to "BROWSE GAMES", games_path %>
           </div>
           <% if player_signed_in? %>
             <div class="nav-button">
-              <%= link_to "Create a new game", new_game_path %>
+              <%= link_to "CREATE NEW GAME", new_game_path %>
             </div>
             <div class="nav-button">
-              <%= link_to "My Profile", player_path(current_player) %>
+              <%= link_to "MY PROFILE", player_path(current_player) %>
             </div>
             <div class="nav-button">
-             <%= link_to "Log Out", destroy_player_session_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?"} %>
+             <%= link_to "LOG OUT", destroy_player_session_path, data: {turbo_method: :delete, turbo_confirm: "Are you sure you want to log out?"} %>
             </div>
           <% else %>
             <div class="nav-button">
-              <%= link_to "Sign In / Sign Up", new_player_session_path %>
+              <%= link_to "SIGN IN / SIGN UP", new_player_session_path %>
             </div>
           <% end %>
           </div>
         </div>
       </div>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+      <div class="devise-alert">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
     <%= yield %>
   </body>
 </html>

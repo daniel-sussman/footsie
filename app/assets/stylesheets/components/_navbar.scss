@@ -1,6 +1,6 @@
 $nav-height: 70px;
-$nav-background: #1A1E25;
-$nav-font-color: white;
+$nav-background: $navy-blue;
+$nav-font-color: $off-white;
 
 .nav-container {
   height: $nav-height;
@@ -21,6 +21,8 @@ $nav-font-color: white;
 }
 
 .nav-button {
+  font-family: $headers-font;
+  color: $nav-font-color;
   margin: 0 auto;
   padding: 0 24px;
 }

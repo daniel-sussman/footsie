@@ -1,3 +1,10 @@
+<div class="box">
+  <% if @game.photo.present? %>
+    <%= cl_image_tag @game.photo.key, crop: :fill %>
+  <% else %>
+    <%= image_tag "football_#{%w[green red blue purple orange teal][@game.id % 6]}.png" %>
+  <% end %>
+</div>
 <div class="row m-5">
   <h1><%= @game.name %></h1>
   <div class="col-7 cards">
@@ -55,4 +62,25 @@
       </ul>
     </div>
   </div>
+</div>
+<div class="row m-5">
+  <h3>Reviews</h3>
+  <% if @game.reviews.empty? %>
+    <small><em>Be the first one to review this list</em></small>
+  <% end %>
+  <ul>
+    <li>
+      <% @game.reviews.each do |review| %>
+        <% review.rating.to_i.times do %>
+          <%= "⭐️" %>
+        <% end %>
+        <%= review.comment %>
+      <% end %>
+    </li>
+  </ul>
+  <% if @status == "owner" %>
+    <p><%= "You cannot write the review on your game" %></p>
+  <% else %>
+    <%= render "new-review"%>
+  <% end %>
 </div>

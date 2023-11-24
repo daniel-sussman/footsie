@@ -169,6 +169,7 @@ class GamesController < ApplicationController
 
   def set_recurrence_rule(game)
     start_time = DateTime.new(game.starting_date.year, game.starting_date.month, game.starting_date.day, game.start_time.hour, game.start_time.min)
+    raise
     rule = IceCube::Rule.weekly.day(game.day_of_week.downcase.to_sym).hour_of_day(start_time.hour).minute_of_hour(start_time.min).until(game.ending_date + 1)
     schedule_to_yaml(game, rule)
     # self.recurrence_rule = rule

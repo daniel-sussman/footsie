@@ -175,7 +175,6 @@ class GamesController < ApplicationController
   end
 
   def schedule_to_yaml(game, rule)
-    raise
     game.recurrence_rule = rule.to_yaml
   end
 

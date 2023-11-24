@@ -1,20 +1,3 @@
-def set_recurrence_rule(game)
-  start_time = DateTime.new(game.starting_date.year, game.starting_date.month, game.starting_date.day, game.start_time.hour, game.start_time.min)
-  raise
-  rule = IceCube::Rule.weekly.day(game.day_of_week.downcase.to_sym).hour_of_day(start_time.hour).minute_of_hour(start_time.min).until(game.ending_date + 1)
-  schedule_to_yaml(game, rule)
-  # self.recurrence_rule = rule
-end
-
-def schedule_to_yaml(game, rule)
-  game.recurrence_rule = rule.to_yaml
-end
-
-def yaml_to_schedule(game)
-  hash = Psych.safe_load(game.recurrence_rule, permitted_classes: [Time, Symbol])
-  IceCube::Schedule.from_hash(hash)
-end
-
 require "faker"
 puts "Wiping all players from the database..."
 PlayerTeam.destroy_all
@@ -69,8 +52,6 @@ puts "Game generation Start."
     player_id: Player.all.sample.id
   )
 
-  @game = new_game
-  set_recurrence_rule(@game)
   red_team = Team.create(name: red_team_name, game_id: new_game.id)
   Team.create(name: blue_team_name, game_id: new_game.id)
   PlayerTeam.create(player_id: new_game.player_id, team_id: red_team.id)

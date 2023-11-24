@@ -12,7 +12,9 @@
   </head>
 
   <body>
-    <div class="nav-container d-flex justify-content-between align-items-center">
+    <header class="nav-container d-flex justify-content-between align-items-center">
+      <div class="container">
+      <div class=" d-flex justify-content-between align-items-center">
       <div class="logo">
         <%= link_to root_path do %>
           <i class="fa-solid fa-futbol fa-xl" style="color: #f8eede"></i>
@@ -46,12 +48,12 @@
           </div>
         <% end %>
       </div>
+      </div>
     </div>
+    </header>
 
     <div class="spacer">
-      &nbsp
     </div>
-
     <div class="devise-alert">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>

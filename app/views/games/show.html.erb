@@ -1,14 +1,20 @@
-<div class="image">
-  <% if @game.photo.present? %>
-    <%= cl_image_tag @game.photo.key, crop: :fill %>
-  <% else %>
-    <%= image_tag "football_#{%w[green red blue purple orange teal][@game.id % 6]}.png" %>
-  <% end %>
+<div class="image photos-cover">
+  <div class="photos">
+    <div class="thumbnails">
+       <% if @game.photo.present? %>
+        <%= cl_image_tag @game.photo.key, crop: :fill %>
+      <% else %>
+        <%= image_tag "football_#{%w[green red blue purple orange teal][@game.id % 6]}.png" %>
+      <% end %>
+      <div class="black"></div>
+      <div class="title"><%= @game.name %></div>
+    </div>
+  </div>
 </div>
+<div class="container">
 <div class="row p-30">
   <div class="col-7 left_card">
-    <div class="card">
-      <h1><%= @game.name %></h1>
+    <div class="show-card">
       <h3>Description</h3>
       <p><%= @game.description %></p>
       <p>Price per person: £<%=@game.price %></p>
@@ -117,4 +123,5 @@
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
   </div>
+</div>
 </div>

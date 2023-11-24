@@ -11,10 +11,6 @@
     <%= f.input :price, input_html: { min: '0', step: '0.25' } %>
     <%= f.input :pitch_identifier %>
     <%= f.input :pitch_type, collection: ["grass", "3-G", "astroturf"] %>
-    <%= f.input :starting_date %>
-    <%= f.input :ending_date %>
-    <%= f.input :day_of_week %>
-    <%= f.input :start_time %>
     <%= f.input :team_size, :collection => 5..11, :prompt => "Select the size of each team" %>
     <%= f.input :gender, collection: ["male", "female", "co-ed"] %>
     <%= f.input :indoor %>

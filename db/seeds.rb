@@ -1,3 +1,26 @@
+name_array = [
+  "Gary's Saturday Kickabout",
+  "Footy with Han in Hackney",
+  "Manoj's Football Mastery",
+  "Soccer with Suhoan in Stokey",
+  "Charlotte's cross-bar challenge",
+  "Dalston FC training",
+  "Hakcney Hackers 5-aside",
+  "David Beckham's freekick classes"
+]
+
+park_array = [
+  "Regent's Park, London",
+  "Hackney Downs, London",
+  "Hyde Park, London",
+  "Ruskin Park, London",
+  "Duliwch Sports Ground, London",
+  "Shoredtich Park, London",
+  "Belsize Park, London",
+  "Clapham Common, London",
+  "South Parks, London"
+]
+
 require "faker"
 puts "Wiping all players from the database..."
 PlayerTeam.destroy_all
@@ -18,22 +41,19 @@ puts "Wiping all games from the database..."
 
 Game.destroy_all
 
-puts "Game generation Start."
+puts "Game generation start."
 
 20.times do
-  name = Faker::Sports::Football.competition
-  description = "#{Faker::Sports::Football.coach}#{Faker::Sports::Football.position}. #{Faker::Quote.mitch_hedberg}"
+  name = name_array.sample
+  description = "#{Faker::Sports::Football.coach} will play #{Faker::Sports::Football.position}. #{Faker::Quote.mitch_hedberg}."
   red_team_name = "#{Faker::Creature::Animal.name}s"
   blue_team_name = "#{Faker::Creature::Animal.name}s"
-  address = Faker::Travel::TrainStation.name(region: 'united_kingdom', type: 'metro')
+  address = park_array.sample
   gender = %w[male female co-ed].sample
   team_size = rand(5..11)
   pitch_identifier = "Pitch #{rand(1..9)}"
   pitch_type = %w[grass 3-G astroturf].sample
-  starting_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2023-11-10', to: '2023-12-30')
-  ending_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2024-1-01', to: '2024-2-01')
-  day_of_week = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].sample
-  start_time = Time.new(2023, 12, 1, rand(8..18), [0, 30].sample)
+  price = rand(5..19)
 
   new_game = Game.create!(
     name: name,
@@ -45,10 +65,7 @@ puts "Game generation Start."
     team_size: team_size,
     pitch_identifier: pitch_identifier,
     pitch_type: pitch_type,
-    starting_date: starting_date,
-    ending_date: ending_date,
-    day_of_week: day_of_week,
-    start_time: start_time,
+    price: price,
     player_id: Player.all.sample.id
   )
 
@@ -70,3 +87,19 @@ Team.all.each do |team|
 end
 
 puts "Teams are formed. Let's play ball!"
+
+puts "Wiping all reviews from the database..."
+
+Review.destroy_all
+
+puts "Review generation start."
+
+200.times do
+  rating = rand(1..5)
+  comment = Faker::Quote.famous_last_words
+  player_id = Player.all.sample.id
+  game_id = Game.all.sample.id
+  Review.create(rating: rating, comment: comment, player_id: player_id, game_id: game_id)
+end
+
+puts "Reviews completed!"

@@ -71,7 +71,6 @@ class GamesController < ApplicationController
     @game.player = current_player
 
     if @game.save
-      set_recurrence_rule(@game)
       red_team = Team.create(name: @game.red_team_name, game_id: @game.id)
       PlayerTeam.create(player_id: current_player.id, team_id: red_team.id)
       Team.create(name: @game.blue_team_name, game_id: @game.id)
@@ -102,7 +101,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name, :description, :red_team_name, :blue_team_name, :price, :gender, :team_size, :pitch_identifier, :pitch_type, :indoor, :address, :starting_date, :ending_date, :day_of_week, :start_time, :photo)
+    params.require(:game).permit(:name, :description, :red_team_name, :blue_team_name, :price, :gender, :team_size, :pitch_identifier, :pitch_type, :indoor, :address, :photo)
   end
 
   def active?(game)
@@ -167,22 +166,4 @@ class GamesController < ApplicationController
     end
   end
 
-  def set_recurrence_rule(game)
-    start_time = DateTime.new(game.starting_date.year, game.starting_date.month, game.starting_date.day, game.start_time.hour, game.start_time.min)
-    rule = IceCube::Rule.weekly.day(game.day_of_week.downcase.to_sym).hour_of_day(start_time.hour).minute_of_hour(start_time.min).until(game.ending_date + 1)
-    schedule_to_yaml(game, rule)
-    # self.recurrence_rule = rule
-  end
-
-  def schedule_to_yaml(game, rule)
-    game.recurrence_rule = rule.to_yaml
-  end
-
-  def yaml_to_schedule(game)
-    hash = Psych.safe_load(game.recurrence_rule, permitted_classes: [Time, Symbol])
-    IceCube::Schedule.from_hash(hash)
-  end
 end
-
-# IceCube::Schedule.new(now = Time.now)
-# schedule.add_recurrence_rule(IceCube::Rule.weekly.day(:saturday).hour_of_day(10, 11))

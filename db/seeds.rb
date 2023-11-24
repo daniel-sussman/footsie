@@ -1,6 +1,6 @@
 require "faker"
 puts "Wiping all players from the database..."
-PlayerGame.destroy_all
+PlayerTeam.destroy_all
 Player.destroy_all
 
 puts "Generating 35 new players..."
@@ -23,6 +23,8 @@ puts "Game generation Start."
 20.times do
   name = Faker::Sports::Football.competition
   description = "#{Faker::Sports::Football.coach}#{Faker::Sports::Football.position}. #{Faker::Quote.mitch_hedberg}"
+  red_team_name = "#{Faker::Creature::Animal.name}s"
+  blue_team_name = "#{Faker::Creature::Animal.name}s"
   address = Faker::Travel::TrainStation.name(region: 'united_kingdom', type: 'metro')
   gender = %w[male female co-ed].sample
   team_size = rand(5..11)
@@ -37,6 +39,8 @@ puts "Game generation Start."
   new_game = Game.create!(
     name: name,
     description: description,
+    red_team_name: red_team_name,
+    blue_team_name: blue_team_name,
     address: address,
     gender: gender,
     team_size: team_size,
@@ -47,18 +51,22 @@ puts "Game generation Start."
     recurring_rule: recurring_rule,
     player_id: Player.all.sample.id
   )
+
+  red_team = Team.create(name: red_team_name, game_id: new_game.id)
+  Team.create(name: blue_team_name, game_id: new_game.id)
+  PlayerTeam.create(player_id: new_game.player_id, team_id: red_team.id)
 end
 
 puts "Game generation complete."
 
-puts "Populating each game with a random number of players..."
+puts "Populating red teams and blue teams..."
 
-Game.all.each do |game|
-  capacity = (game.team_size * 2) - 1
-  players = (Player.all - [game.player]).shuffle
-  rand(0..capacity).times do |index, player_game|
-    PlayerGame.create(game_id: game.id, player_id: players[index].id)
+Team.all.each do |team|
+  capacity = team.game.team_size - team.player_teams.size
+  players = (Player.all - [team.game.player]).shuffle
+  rand(0..capacity).times do |index|
+    PlayerTeam.create(team_id: team.id, player_id: players[index].id)
   end
 end
 
-puts "Game population complete."
+puts "Teams are formed. Let's play ball!"

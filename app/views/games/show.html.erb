@@ -63,7 +63,7 @@
         <% elsif @status == "member" %>
           <%=
             link_to "Leave this game?",
-            player_game_path(@player_game),
+            player_team_path(@player_team),
             data: {turbo_method: :patch, turbo_confirm: "Are you sure you want to leave the game #{@game.name}?"}
           %>
         <% elsif @status == "full" %>
@@ -72,8 +72,13 @@
           <p>Sorry, this game is for <%= @game.gender %>s only.</p>
         <% else %>
           <button class="custom-btn btn text"><span><%=
-            link_to "Join this game",
-            game_player_games_path(@game),
+            link_to "Join #{@game.teams[0].name}",
+            join_team_path(@game.teams[0]),
+            data: {turbo_method: :post}
+          %></span></button>
+          <button class="custom-btn btn text"><span><%=
+            link_to "Join #{@game.teams[1].name}",
+            join_team_path(@game.teams[1]),
             data: {turbo_method: :post}
           %></span></button>
         <% end %>

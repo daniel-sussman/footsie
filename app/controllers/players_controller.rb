@@ -5,24 +5,14 @@ class PlayersController < ApplicationController
     else
       @player = current_player
       @host_games = Game.where("player_id = #{@player.id}")
-      @player_games = PlayerGame.where("player_id = #{@player.id} AND active = true")
-      @past_games = PlayerGame.where("player_id = #{@player.id} AND active = false")
+      @player_teams = PlayerTeam.where("player_id = #{@player.id} AND active = true")
+      @past_games = PlayerTeam.where("player_id = #{@player.id} AND active = false").map(&:game)
     end
   end
 
   def new
     @player = Player.new
   end
-
-  # def create
-  #   @player = Player.new(player_params)
-  #   if @player.save
-  #     raise
-  #     redirect_to games_path
-  #   else
-  #     render :games, status: :unprocessable_entity
-  #   end
-  # end
 
   private
 

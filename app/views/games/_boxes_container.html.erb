@@ -10,9 +10,9 @@
               <%= image_tag "football_#{%w[green red blue purple orange teal azul beige navy rojo sun verde yellow][game.id % 13]}.png" %>
             <% end %>
             <h2><%= game.name %></h2>
-            <p>£<%= game.price %> per person</p>
+            <p>£<%= game.price.to_i %> per person</p>
             <p>Gender: <%= game.gender %> only</p>
-            <p>Address: <%= game.address %></p>
+            <p>Location: <%= game.address %></p>
             <div class="d-flex justify-content-between mt-8">
               <button class="button2 mt-2"><span><%= link_to "Read more", game_path(game) %></span></button>
             </div>

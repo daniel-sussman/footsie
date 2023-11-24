@@ -41,7 +41,7 @@ puts "Wiping all games from the database..."
 
 Game.destroy_all
 
-puts "Game generation Start."
+puts "Game generation start."
 
 20.times do
   name = name_array.sample
@@ -53,6 +53,7 @@ puts "Game generation Start."
   team_size = rand(5..11)
   pitch_identifier = "Pitch #{rand(1..9)}"
   pitch_type = %w[grass 3-G astroturf].sample
+  price = rand(5..19)
 
   new_game = Game.create!(
     name: name,
@@ -86,3 +87,19 @@ Team.all.each do |team|
 end
 
 puts "Teams are formed. Let's play ball!"
+
+puts "Wiping all reviews from the database..."
+
+Review.destroy_all
+
+puts "Review generation start."
+
+200.times do
+  rating = rand(1..5)
+  comment = Faker::Quote.famous_last_words
+  player_id = Player.all.sample.id
+  game_id = Game.all.sample.id
+  Review.create(rating: rating, comment: comment, player_id: player_id, game_id: game_id)
+end
+
+puts "Reviews completed!"

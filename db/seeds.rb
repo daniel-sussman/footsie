@@ -53,11 +53,6 @@ puts "Game generation Start."
   team_size = rand(5..11)
   pitch_identifier = "Pitch #{rand(1..9)}"
   pitch_type = %w[grass 3-G astroturf].sample
-  starting_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2023-11-10', to: '2023-12-30')
-  ending_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2024-1-01', to: '2024-2-01')
-  day_of_week = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].sample
-  start_time = Time.new(2023, 12, 1, rand(8..18), [0, 30].sample)
-  price = rand(5.0..15.0)
 
   new_game = Game.create!(
     name: name,
@@ -69,12 +64,8 @@ puts "Game generation Start."
     team_size: team_size,
     pitch_identifier: pitch_identifier,
     pitch_type: pitch_type,
-    starting_date: starting_date,
-    ending_date: ending_date,
-    day_of_week: day_of_week,
-    start_time: start_time,
-    player_id: Player.all.sample.id,
     price: price,
+    player_id: Player.all.sample.id
   )
 
   red_team = Team.create(name: red_team_name, game_id: new_game.id)

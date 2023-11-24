@@ -10,7 +10,6 @@
               <%= image_tag "football_#{%w[green red blue purple orange teal azul beige navy rojo sun verde yellow][game.id % 13]}.png" %>
             <% end %>
             <h2><%= game.name %></h2>
-            <p>Kick off: <%= game.starting_date %></p>
             <p>£<%= game.price %> per person</p>
             <p>Gender: <%= game.gender %> only</p>
             <p>Address: <%= game.address %></p>

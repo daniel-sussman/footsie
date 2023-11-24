@@ -61,6 +61,7 @@ class GamesController < ApplicationController
         info_card_html: render_to_string(partial: "info_card", locals: { game: @game }),
         marker_html: render_to_string(partial: "marker_orange")
       }]
+      
   end
 
   def new

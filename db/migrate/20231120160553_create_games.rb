@@ -14,7 +14,9 @@ class CreateGames < ActiveRecord::Migration[7.1]
       t.string :address
       t.date :starting_date
       t.date :ending_date
-      t.text :recurring_rule
+      t.string :day_of_week
+      t.time :start_time
+      t.text :recurrence_rule
       t.references :player, null: false, foreign_key: true
 
       t.timestamps

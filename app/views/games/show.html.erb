@@ -89,7 +89,7 @@
   <div class="card">
     <h3>Reviews</h3>
     <% if @game.reviews.empty? %>
-      <small><em>Be the first one to review this list</em></small>
+      <small><em>There are no reviews for this game.</em></small>
     <% else %>
       <p>Average rating: <%= @game.reviews.inject(0) { |sum, review| review.rating } / @game.reviews.count %></p>
     <% end %>
@@ -104,9 +104,11 @@
       </li>
     </ul>
     <% if @status == "owner" %>
-      <p><%= "You cannot write the review on your game" %></p>
+      <p><%= "You cannot review your own game." %></p>
     <% else %>
-      <%= render "new-review"%>
+      <% joined_game = PlayerTeam.where(player_id: current_player.id).map { |pt| pt.game.id }.include?(@game.id)%>
+      <% already_reviewed = Review.find_by(game_id: @game.id, player_id: current_player.id)%>
+      <%= render "new-review" if joined_game && !already_reviewed %>
     <% end %>
   </div>
 </div>

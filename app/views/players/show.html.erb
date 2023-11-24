@@ -2,31 +2,31 @@
   <div class="d-flex p-2 ROW">
     <div class="col-5">
       <h2>My profile</h2>
-      <div class="profile_img">
+      <div class="profile_img mb-20">
         <% if @player.photo.present? %>
           <%= cl_image_tag @player.photo.key, crop: :fill %>
         <% else %>
           <%= image_tag "football_#{%w[green red blue purple orange teal][@player.id % 6]}.png" %>
         <% end %>
       </div>
-      <ul>
-          <% if @player_teams.size > 0 %>
-            <% light = "🟢"%>
-          <% else %>
-            <% light = "🔴"%>
-          <% end%>
-          <li>
-            <%= "#{@player.name} #{light}" %>
-            <%= link_to game.name, game_path(game) %><br>
-            <%= link_to "Leave a review", "#{game_path(game)}#reviews" %><br>
-          </li>
-          <li>
-            <%= @player.gender %>
-          </li>
-          <li>
-            <%= @player.description %>
-          </li>
-      </ul>
+      <div class="m-20">
+        <ul>
+            <% if @player_teams.size > 0 %>
+              <% light = "🟢"%>
+            <% else %>
+              <% light = "🔴"%>
+            <% end%>
+            <li>
+              <h3><%= "#{@player.name} #{light}" %></h3>
+            </li>
+            <li>
+              <%= @player.gender %>
+            </li>
+            <li>
+              <%= @player.description %>
+            </li>
+        </ul>
+      </div>
     </div>
     <div class="col-7">
       <h2>My games:</h2>
@@ -50,7 +50,7 @@
         </ul>
       <% else %>
         <p>You haven't joined any games.</p>
-        <%= link_to "Find a game to join!", games_path %>
+        <button class="button2 mt-2"><span><%= link_to "Find a game to join!", games_path %></span></button>
       <% end %>
       <% if @past_games.present? %>
         <h3>Finished games:</h3>
@@ -63,9 +63,8 @@
           <% end %>
         </ul>
       <% end %>
-      <%= link_to "Edit my profile", edit_player_registration_path(@player) %>
-      <%= link_to "Log out", destroy_player_session_path %>
+      <button class="button2 mt-2"><span><%= link_to "Edit my profile", edit_player_registration_path(@player) %></span></button>
+      <button class="button2 mt-2"><span><%= link_to "Log out", destroy_player_session_path %></span></button>
     </div>
-
   </div>
 </div>

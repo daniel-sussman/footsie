@@ -6,9 +6,6 @@ $color-white: #FFF;
 
 .form {
   background-color:$color-bg;
-  body, html {
-    background-color:$color-bg;
-  }
 
   body, p, input, select, textarea, button {
       font-family: 'Montserrat', sans-serif;
@@ -18,9 +15,8 @@ $color-white: #FFF;
 
   div, p {
     color: $color-shadow;
-    text-shadow: 1px 1px 1px $color-white;
+    text-shadow: 1px 1px 1px $navy-blue;
   }
-
 
   form {
     padding: $ruler;
@@ -31,16 +27,6 @@ $color-white: #FFF;
   .segment {
     padding: $ruler*2 0;
     text-align: center;
-  }
-
-  button, input {
-    border: 0;
-    outline: 0;
-    font-size: $ruler;
-    border-radius: $ruler*20;
-    padding: $ruler;
-    background-color:$color-bg;
-    text-shadow: 1px 1px 0 $navy-blue;
   }
 
   label {
@@ -64,9 +50,11 @@ $color-white: #FFF;
     padding: $ruler;
     background-color:$color-bg;
     text-shadow: 1px 1px 0 $navy-blue;
+    color: $navy-blue;
 
     &:focus {
-      box-shadow:  inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+      box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $navy-blue;
+      color: $navy-blue;
     }
   }
 

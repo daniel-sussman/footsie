@@ -103,12 +103,20 @@ ul{
   transition: all 0.2s ease-in;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
   border-radius: 5px;
-  padding: 20px;
-  h3{
+  padding: 0px;
+  .card-header{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
     background-color: #000000;
     padding: 12px 20px;
+    h3{
     color: #fff;
+    margin-bottom: 0px;
+    }
   }
+
   h4{
     font-size: 18px;
     letter-spacing: 1px;
@@ -120,7 +128,28 @@ ul{
       width: 100%;
   }
 }
-
+.team-row{
+  padding: 12px 20px;
+}
 .team-card{
-
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  .person-img{
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img{
+      max-width: 50%;
+      margin: auto;
+      padding: 0.5em;
+      border-radius: 50%
+    }
+  }
+  h4{
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-align: center;
+  }
 }

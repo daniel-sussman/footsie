@@ -17,9 +17,9 @@
       <div class="decription-card text-container">
         <h3><b>Description</b></h3>
         <p><%= @game.description %></p>
-        <p><b>Price per person:</b> £<%=@game.price %></p>
+        <p><b>Price per person:</b> £<%= '%.2f' % @game.price %></p>
         <p><b>Gender:</b> <%= @game.gender %></p>
-        <p><b>Maximum players:</b> <%= 2 * @game.team_size %></p>
+        <p><b>This game currently has </b> <%= @players.count %> / <%= 2 * @game.team_size %> players</p>
         <p><b>Pitch ID:</b> <%= @game.pitch_identifier %></p>
         <p><b>Pitch type:</b> <%= @game.pitch_type %></p>
         <p><b>Pitch address:</b> <%= @game.address %></p>
@@ -34,53 +34,97 @@
   </div>
   <hr>
   <div class="row p-30 mb-3">
-    <div class="col-12">
-      <h3><i class="fas fa-users">&nbsp;</i> Game Details</h3>
-      <h4>This game currently has <span><%= @players.count + 1 %> player<%= "s" if @players.count > 0 %>:</span></h4>
-      <% if @status == "owner" %>
-            <%=
-              link_to "This is your game. Would you like to delete it?",
-              game_path(@game),
-              data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-            %>
-          <% elsif @status == "member" %>
-            <%=
-              link_to "Leave this game?",
-              player_team_path(@player_team),
-              data: {turbo_method: :patch, turbo_confirm: "Are you sure you want to leave the game #{@game.name}?"}
-            %>
-          <% elsif @status == "full" %>
-            <p>This game is currently full.</p>
-          <% elsif @status == "wrong_gender" %>
-            <p>Sorry, this game is for <%= @game.gender %>s only.</p>
-          <% else %>
-            <div class="row">
-              <p>Choose Your Team</p>
+      <div class="col-6 ">
+        <div class="custom-card">
+          <div class="card-header">
+            <h3><i class="fas fa-users">&nbsp;</i> Team Tiger</h3>
+            <div class="card-btnsection">
+              <% if @status == "owner" %>
+              <%=
+                link_to "This is your game. Would you like to delete it?",
+                game_path(@game),
+                data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+              %>
+            <% elsif @status == "member" %>
+              <%=
+                link_to "Leave this game?",
+                player_team_path(@player_team),
+                data: {turbo_method: :patch, turbo_confirm: "Are you sure you want to leave the game #{@game.name}?"}
+              %>
+            <% elsif @status == "full" %>
+              <p>This game is currently full.</p>
+            <% elsif @status == "wrong_gender" %>
+              <p>Sorry, this game is for <%= @game.gender %>s only.</p>
+            <% else %>
+              <button class="custom-btn btn text"><span><%=
+                link_to "Join #{@game.teams[0].name}",
+                join_team_path(@game.teams[0]),
+                data: {turbo_method: :post}
+              %></span></button>
+            <% end %>
             </div>
-            <button class="button2"><span><%=
-              link_to "Join #{@game.teams[0].name}",
-              join_team_path(@game.teams[0]),
-              data: {turbo_method: :post}
-            %></span></button>
-            <button class="button2"><span><%=
-              link_to "Join #{@game.teams[1].name}",
-              join_team_path(@game.teams[1]),
-              data: {turbo_method: :post}
-            %></span></button>
-          <% end %>
-    </div>
-    <div class="col-6 ">
-      <div class="custom-card">
-        <h3><i class="fas fa-users">&nbsp;</i><%="TEAM #{@game.teams[0].name}"%></h3>
-        <ul class= "row">
-          <% @game.teams[0].players.each do |player| %>
-            <li class="col-md-3 team-card">
-              <%=player.name%>
-              <%=player.email%>
-              <%=player.description%>
-            </li>
-          <% end %>
-        </ul>
+          </div>
+          <div class="row team-row">
+            <% @game.teams[0].players.each do |player| %>
+              <div class="col-md-6 team-card">
+                <div class="person-img">
+                  <% if player.photo.present? %>
+                    <%= cl_image_tag player.photo.key, crop: :fill %>
+                  <% else %>
+                  <img class="rounded-lg w-20 h-20" alt="No alt" src="https://100k-faces.glitch.me/random-image">
+                  <% end %>
+                  <h4><%=player.name%></h4>
+                </div>
+               </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="custom-card">
+         <div class="card-header">
+            <h3><i class="fas fa-users">&nbsp;</i> Team Dragon</h3>
+            <div class="card-btnsection">
+              <% if @status == "owner" %>
+                <%=
+                  link_to "This is your game. Would you like to delete it?",
+                  game_path(@game),
+                  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+                %>
+              <% elsif @status == "member" %>
+                <%=
+                  link_to "Leave this game?",
+                  player_team_path(@player_team),
+                  data: {turbo_method: :patch, turbo_confirm: "Are you sure you want to leave the game #{@game.name}?"}
+                %>
+              <% elsif @status == "full" %>
+                <p>This game is currently full.</p>
+              <% elsif @status == "wrong_gender" %>
+                <p>Sorry, this game is for <%= @game.gender %>s only.</p>
+              <% else %>
+                <button class="custom-btn btn text"><span><%=
+                  link_to "Join #{@game.teams[1].name}",
+                  join_team_path(@game.teams[1]),
+                  data: {turbo_method: :post}
+                %></span></button>
+              <% end %>
+            </div>
+          </div>
+          <div class="row team-row">
+            <% @game.teams[1].players.each do |player| %>
+              <div class="col-md-6 team-card">
+                <div class="person-img">
+                  <% if player.photo.present? %>
+                    <%= cl_image_tag player.photo.key, crop: :fill %>
+                  <% else %>
+                    <img class="rounded-lg w-20 h-20" alt="No alt" src="https://100k-faces.glitch.me/random-image">
+                  <% end %>
+                  <h4><%=player.name%></h4>
+                </div>
+               </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-6">
@@ -102,7 +146,7 @@
       <% if @game.reviews.empty? %>
         <small><em>Be the first one to review this list</em></small>
       <% else %>
-        <p>Average rating: <%= @game.reviews.inject(0) { |sum, review| review.rating } / @game.reviews.count %></p>
+        <p>Average rating: <%= ( @game.reviews.inject(0.0) { |sum, review| sum + review.rating } / @game.reviews.count ).round(1) %></p>
       <% end %>
       <ul>
         <li>
@@ -117,11 +161,10 @@
   <hr>
   <div class="row m-0">
     <div class="container d-flex">
-      <div style="width: 100%; height: 400px;"
+       <div style='width: 100%; height: 400px;'
         data-controller="map"
         data-map-markers-value="<%= @markers.to_json %>"
-        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-      </div>
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
   </div>
 </div>

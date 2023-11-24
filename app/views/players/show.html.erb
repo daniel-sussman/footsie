@@ -9,24 +9,22 @@
           <%= image_tag "football_#{%w[green red blue purple orange teal][@player.id % 6]}.png" %>
         <% end %>
       </div>
-      <div class="m-20">
-        <ul>
-            <% if @player_teams.size > 0 %>
-              <% light = "🟢"%>
-            <% else %>
-              <% light = "🔴"%>
-            <% end%>
-            <li>
-              <h3><%= "#{@player.name} #{light}" %></h3>
-            </li>
-            <li>
-              <%= @player.gender %>
-            </li>
-            <li>
-              <%= @player.description %>
-            </li>
-        </ul>
-      </div>
+      <ul>
+          <% if @player_teams.size > 0 %>
+            <% light = "🟢"%>
+          <% else %>
+            <% light = "🔴"%>
+          <% end%>
+          <li>
+            <%= "#{@player.name} #{light}" %>
+          </li>
+          <li>
+            <%= @player.gender %>
+          </li>
+          <li>
+            <%= @player.description %>
+          </li>
+      </ul>
     </div>
     <div class="col-7">
       <h2>My games:</h2>

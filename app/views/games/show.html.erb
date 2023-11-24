@@ -153,7 +153,6 @@
       <% if @status == "owner" %>
       <p><%= "You cannot review your own game." %></p>
     <% else %>
-      <%= render "new-review"%>
       <% joined_game = PlayerTeam.where(player_id: current_player.id).map { |pt| pt.game.id }.include?(@game.id)%>
       <% already_reviewed = Review.find_by(game_id: @game.id, player_id: current_player.id)%>
       <%= render "new-review" if joined_game && !already_reviewed %>

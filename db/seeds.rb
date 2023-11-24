@@ -30,11 +30,10 @@ puts "Game generation Start."
   team_size = rand(5..11)
   pitch_identifier = "Pitch #{rand(1..9)}"
   pitch_type = %w[grass 3-G astroturf].sample
-  starting_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2023-12-21', to: '2023-12-30')
+  starting_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2023-11-10', to: '2023-12-30')
   ending_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2024-1-01', to: '2024-2-01')
-  schedule = IceCube::Schedule.new(now = Time.now)
-  schedule.add_recurrence_rule(IceCube::Rule.weekly.day([:saturday, :sunday].sample).hour_of_day(rand(8..18)))
-  recurring_rule = schedule.to_yaml
+  day_of_week = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].sample
+  start_time = Time.new(2023, 12, 1, rand(8..18), [0, 30].sample)
 
   new_game = Game.create!(
     name: name,
@@ -48,7 +47,8 @@ puts "Game generation Start."
     pitch_type: pitch_type,
     starting_date: starting_date,
     ending_date: ending_date,
-    recurring_rule: recurring_rule,
+    day_of_week: day_of_week,
+    start_time: start_time,
     player_id: Player.all.sample.id
   )
 

@@ -17,8 +17,6 @@
           <% end%>
           <li>
             <%= "#{@player.name} #{light}" %>
-            <%= link_to game.name, game_path(game) %><br>
-            <%= link_to "Leave a review", "#{game_path(game)}#reviews" %><br>
           </li>
           <li>
             <%= @player.gender %>

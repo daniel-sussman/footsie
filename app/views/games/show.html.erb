@@ -17,9 +17,9 @@
       <div class="decription-card text-container">
         <h3><b>Description</b></h3>
         <p><%= @game.description %></p>
-        <p><b>Price per person:</b> £<%=@game.price %></p>
+        <p><b>Price per person:</b> £<%= '%.2f' % @game.price %></p>
         <p><b>Gender:</b> <%= @game.gender %></p>
-        <p><b>Maximum players:</b> <%= 2 * @game.team_size %></p>
+        <p><b>This game currently has </b> <%= @players.count %> / <%= 2 * @game.team_size %> players</p>
         <p><b>Pitch ID:</b> <%= @game.pitch_identifier %></p>
         <p><b>Pitch type:</b> <%= @game.pitch_type %></p>
         <p><b>Pitch address:</b> <%= @game.address %></p>
@@ -153,11 +153,10 @@
   <hr>
   <div class="row m-0">
     <div class="container d-flex">
-      <div style="width: 100%; height: 400px;"
+       <div style='width: 100%; height: 400px;'
         data-controller="map"
         data-map-markers-value="<%= @markers.to_json %>"
-        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-      </div>
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
   </div>
 </div>

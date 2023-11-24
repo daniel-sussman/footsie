@@ -44,3 +44,19 @@
       color: $white;
     }
 }
+.custom-btn{
+  margin: 5px 0px;
+  background-color: $orange;
+  border: 3px solid transparent;
+  a {
+    color: $white;
+    text-decoration:none;
+  }
+  &:hover{
+    background-color: $white;
+    border: 3px solid $orange;
+    a{
+      color: $orange;
+    }
+  }
+}

@@ -36,31 +36,10 @@
   <div class="row p-30 mb-3">
       <div class="col-6 ">
         <div class="custom-card">
-          <h3><i class="fas fa-users">&nbsp;</i> Team Tiger</h3>
-          <h4>This game currently has <span><%= @players.count + 1 %> player<%= "s" if @players.count > 0 %>:</span></h4>
-
-
-          <ul class= "row">
-            <% @game.teams[0].players.each do |player| %>
-              <li class="col-md-3 team-card">
-                <%=player.name%>
-                <%=player.email%>
-                <%=player.description%>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="custom-card">
-          <h3>Team Dragon</h3>
-          <p><strong>STATUS: <%= @status %></strong></p>
-            <ul>
-            <% @game.teams[1].players.each do |player| %>
-            <li><%=player.name%></li>
-             <% end %>
-          </ul>
-            <% if @status == "owner" %>
+          <div class="card-header">
+            <h3><i class="fas fa-users">&nbsp;</i> Team Tiger</h3>
+            <div class="card-btnsection">
+              <% if @status == "owner" %>
               <%=
                 link_to "This is your game. Would you like to delete it?",
                 game_path(@game),
@@ -82,12 +61,69 @@
                 join_team_path(@game.teams[0]),
                 data: {turbo_method: :post}
               %></span></button>
-              <button class="custom-btn btn text"><span><%=
-                link_to "Join #{@game.teams[1].name}",
-                join_team_path(@game.teams[1]),
-                data: {turbo_method: :post}
-              %></span></button>
             <% end %>
+            </div>
+          </div>
+          <div class="row team-row">
+            <% @game.teams[0].players.each do |player| %>
+              <div class="col-md-6 team-card">
+                <div class="person-img">
+                  <% if player.photo.present? %>
+                    <%= cl_image_tag player.photo.key, crop: :fill %>
+                  <% else %>
+                  <img class="rounded-lg w-20 h-20" alt="No alt" src="https://100k-faces.glitch.me/random-image">
+                  <% end %>
+                  <h4><%=player.name%></h4>
+                </div>
+               </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="custom-card">
+         <div class="card-header">
+            <h3><i class="fas fa-users">&nbsp;</i> Team Dragon</h3>
+            <div class="card-btnsection">
+              <% if @status == "owner" %>
+                <%=
+                  link_to "This is your game. Would you like to delete it?",
+                  game_path(@game),
+                  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+                %>
+              <% elsif @status == "member" %>
+                <%=
+                  link_to "Leave this game?",
+                  player_team_path(@player_team),
+                  data: {turbo_method: :patch, turbo_confirm: "Are you sure you want to leave the game #{@game.name}?"}
+                %>
+              <% elsif @status == "full" %>
+                <p>This game is currently full.</p>
+              <% elsif @status == "wrong_gender" %>
+                <p>Sorry, this game is for <%= @game.gender %>s only.</p>
+              <% else %>
+                <button class="custom-btn btn text"><span><%=
+                  link_to "Join #{@game.teams[1].name}",
+                  join_team_path(@game.teams[1]),
+                  data: {turbo_method: :post}
+                %></span></button>
+              <% end %>
+            </div>
+          </div>
+          <div class="row team-row">
+            <% @game.teams[1].players.each do |player| %>
+              <div class="col-md-6 team-card">
+                <div class="person-img">
+                  <% if player.photo.present? %>
+                    <%= cl_image_tag player.photo.key, crop: :fill %>
+                  <% else %>
+                    <img class="rounded-lg w-20 h-20" alt="No alt" src="https://100k-faces.glitch.me/random-image">
+                  <% end %>
+                  <h4><%=player.name%></h4>
+                </div>
+               </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

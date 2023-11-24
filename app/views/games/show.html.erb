@@ -151,7 +151,6 @@
         </li>
       </ul>
       <% if @status == "owner" %>
-      <p><%= "You cannot write the review on your game" %></p>
       <p><%= "You cannot review your own game." %></p>
     <% else %>
       <%= render "new-review"%>

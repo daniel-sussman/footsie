@@ -1,3 +1,26 @@
+name_array = [
+  "Gary's Saturday Kickabout",
+  "Footy with Han in Hackney",
+  "Manoj's Football Mastery",
+  "Soccer with Suhoan in Stokey",
+  "Charlotte's cross-bar challenge",
+  "Dalston FC training",
+  "Hakcney Hackers 5-aside",
+  "David Beckham's freekick classes"
+]
+
+park_array = [
+  "Regent's Park, London",
+  "Hackney Downs, London",
+  "Hyde Park, London",
+  "Ruskin Park, London",
+  "Duliwch Sports Ground, London",
+  "Shoredtich Park, London",
+  "Belsize Park, London",
+  "Clapham Common, London",
+  "South Parks, London"
+]
+
 require "faker"
 puts "Wiping all players from the database..."
 PlayerTeam.destroy_all
@@ -21,11 +44,11 @@ Game.destroy_all
 puts "Game generation Start."
 
 20.times do
-  name = Faker::Sports::Football.competition
-  description = "#{Faker::Sports::Football.coach}#{Faker::Sports::Football.position}. #{Faker::Quote.mitch_hedberg}"
+  name = name_array.sample
+  description = "#{Faker::Sports::Football.coach} will play #{Faker::Sports::Football.position}. #{Faker::Quote.mitch_hedberg}."
   red_team_name = "#{Faker::Creature::Animal.name}s"
   blue_team_name = "#{Faker::Creature::Animal.name}s"
-  address = Faker::Travel::TrainStation.name(region: 'united_kingdom', type: 'metro')
+  address = park_array.sample
   gender = %w[male female co-ed].sample
   team_size = rand(5..11)
   pitch_identifier = "Pitch #{rand(1..9)}"
@@ -34,6 +57,7 @@ puts "Game generation Start."
   ending_date = Faker::Date.on_day_of_week_between(day: :tuesday, from: '2024-1-01', to: '2024-2-01')
   day_of_week = %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday].sample
   start_time = Time.new(2023, 12, 1, rand(8..18), [0, 30].sample)
+  price = rand(5.0..15.0)
 
   new_game = Game.create!(
     name: name,
@@ -49,7 +73,8 @@ puts "Game generation Start."
     ending_date: ending_date,
     day_of_week: day_of_week,
     start_time: start_time,
-    player_id: Player.all.sample.id
+    player_id: Player.all.sample.id,
+    price: price,
   )
 
   red_team = Team.create(name: red_team_name, game_id: new_game.id)

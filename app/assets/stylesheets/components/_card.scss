@@ -94,3 +94,33 @@ ul{
     }
   }
 }
+
+.custom-card{
+  //  color: $orange;
+  position: relative;
+  background: #FFFFFF;
+  margin-top: 20px;
+  transition: all 0.2s ease-in;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  padding: 20px;
+  h3{
+    background-color: #000000;
+    padding: 12px 20px;
+    color: #fff;
+  }
+  h4{
+    font-size: 18px;
+    letter-spacing: 1px;
+    span{
+      color: $orange;
+    }
+  }
+  input[type="text"] {
+      width: 100%;
+  }
+}
+
+.team-card{
+
+}

@@ -10,3 +10,24 @@
 @import "font";
 @import "img";
 @import "map";
+
+.decription-card{
+  h3{
+    margin-top: 0px;
+    margin-bottom: 4px;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Roboto Black', sans-serif;
+    letter-spacing: 1px;
+    color: #000000;
+  }
+  p{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #000000;
+  }
+}

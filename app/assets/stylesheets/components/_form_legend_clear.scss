@@ -13,7 +13,8 @@ legend ~ div.form-check:first-of-type {
 //   color: $navy-blue;
 // }
 
-.form-control {
+.form-control,
+.form-select {
   color: #000;
   background-color: white;
   &:focus{

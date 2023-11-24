@@ -129,18 +129,6 @@
         </div>
       </div>
     </div>
-    <div class="col-6">
-      <div class="custom-card">
-        <h3><i class="fas fa-users">&nbsp;</i><%="TEAM #{@game.teams[1].name}"%></h3>
-        <p><strong>STATUS: <%= @status %></strong></p>
-          <ul>
-          <% @game.teams[1].players.each_with_index do |player| %>
-            <li><%=player.name%> </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
   <hr>
   <div class="row m-0 mb-3" id="reviews">
     <div class="custom-card">

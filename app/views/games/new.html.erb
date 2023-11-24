@@ -1,18 +1,20 @@
-<p>Todo.... Footsie Form</p>
-
-
-<%= simple_form_for(@game) do |f| %>
-  <%= f.input :name %>
-  <%= f.input :address %>
-  <%= f.input :description %>
-  <%= f.input :red_team_name %>
-  <%= f.input :blue_team_name %>
-  <%= f.input :price, input_html: { min: '0', step: '0.25' } %>
-  <%= f.input :pitch_identifier %>
-  <%= f.input :pitch_type, collection: ["grass", "3-G", "astroturf"] %>
-  <%= f.input :team_size, :collection => 5..11, :prompt => "Select the size of each team" %>
-  <%= f.input :gender, collection: ["male", "female", "co-ed"] %>
-  <%= f.input :indoor %>
-  <%= f.input :photo, as: :file, label: "Upload an image (optional)" %>
-  <%= f.submit 'Host this game', class: 'btn btn-primary'%>
-<% end %>
+<div class="form">
+  <div class="segment">
+    <h1>Create Your Game</h1>
+  </div>
+  <%= simple_form_for @game do |f| %>
+    <%= f.input :name, placeholder: 'name', label:false %>
+    <%= f.input :address, placeholder: 'address', label:false %>
+    <%= f.input :description %>
+    <%= f.input :red_team_name, placeholder: 'A-team name', label:false %>
+    <%= f.input :blue_team_name, placeholder: 'B-team name', label:false %>
+    <%= f.input :price, input_html: { min: '0', step: '0.25' } %>
+    <%= f.input :pitch_identifier %>
+    <%= f.input :pitch_type, collection: ["grass", "3-G", "astroturf"] %>
+    <%= f.input :team_size, :collection => 5..11, :prompt => "Select the size of each team" %>
+    <%= f.input :gender, collection: ["male", "female", "co-ed"] %>
+    <%= f.input :indoor %>
+    <%= f.input :photo, as: :file, label: "Upload an image (optional)", class: 'button' %>
+    <%= f.submit 'Host this game', class: 'red' %>
+  <% end %>
+</div>

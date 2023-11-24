@@ -17,7 +17,7 @@ class GamesController < ApplicationController
       results = Geocoder.search(location)
       @coords = results.first.coordinates
 
-      @games = Game.all.sort_by { |g| g.distance_to(@coords)}
+      @games = Game.geocoded.sort_by { |g| g.distance_to(@coords)}
       @open_games = @games.reject { |g| closed?(g) }
 
       @markers = Game.all.geocoded.map do |game|
@@ -44,6 +44,7 @@ class GamesController < ApplicationController
     @games = Game.all
     @review = Review.new
     @players = game_active_players(@game)
+    @coords = [@game.latitude, @game.longitude]
     if player_signed_in?
       @player = current_player
       @status = fetch_player_status
@@ -54,12 +55,12 @@ class GamesController < ApplicationController
       @status = "login"
     end
     @open_games = @games.reject { |game| closed?(game) }
-    @markers = @games.geocoded.map do |game|
-      {
-        lat: game.latitude,
-        lng: game.longitude
-      }
-    end
+    @markers = [{
+        lat: @game.latitude,
+        lng: @game.longitude,
+        info_card_html: render_to_string(partial: "info_card", locals: { game: @game }),
+        marker_html: render_to_string(partial: "marker_orange")
+      }]
   end
 
   def new

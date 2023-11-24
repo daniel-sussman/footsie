@@ -9,16 +9,15 @@ export default class extends Controller {
     pos: Array  }
 
   connect() {
-    console.log(this.posValue);
     mapboxgl.accessToken = this.apiKeyValue
-    if (this.posValue) {
+    if (this.posValue.length > 0) {
       this.map = new mapboxgl.Map({
         container: this.element,
         style: "mapbox://styles/mapbox/streets-v10",
         center: this.posValue,
         zoom: 12
       })
-    this.#addMarkersToMap()
+      this.#addMarkersToMap()
     } else {
       this.map = new mapboxgl.Map({
         container: this.element,
@@ -27,7 +26,6 @@ export default class extends Controller {
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
     }
-
   }
 
   #addMarkersToMap() {

@@ -36,8 +36,8 @@
         <% @player_teams.each do |player_team| %>
           <% game = player_team.game %>
           <li>
-            <%= link_to game.name, game_path(game) %>
-            <p>Leave a review</p>
+            <%= link_to game.name, game_path(game) %><br>
+            <%= link_to "Leave a review", "#{game_path(game)}#reviews" %><br>
           </li>
         <% end %>
       </ul>
@@ -57,6 +57,7 @@
       </ul>
     <% end %>
     <%= link_to "Edit my profile", edit_player_registration_path(@player) %>
+    <%= link_to "Log out", destroy_player_session_path %>
   </div>
 </div>
 

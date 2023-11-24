@@ -19,7 +19,7 @@
         <p><%= @game.description %></p>
         <p><b>Price per person:</b> £<%=@game.price %></p>
         <p><b>Gender:</b> <%= @game.gender %></p>
-        <p><b>Maximum players:</b> <%= 2 * @game.team_size %></p>
+        <p><b>This game currently has </b> <%= @players.count %> / <%= 2 * @game.team_size %> players</p>
         <p><b>Pitch ID:</b> <%= @game.pitch_identifier %></p>
         <p><b>Pitch type:</b> <%= @game.pitch_type %></p>
         <p><b>Pitch address:</b> <%= @game.address %></p>
@@ -37,7 +37,7 @@
       <div class="col-6 ">
         <div class="custom-card">
           <h3><i class="fas fa-users">&nbsp;</i> Team Tiger</h3>
-          <h4>This game currently has <span><%= @players.count + 1 %> player<%= "s" if @players.count > 0 %>:</span></h4>
+          <h4>This game currently has <span><%= @players.count %> player<%= "s" if @players.count > 0 %>:</span></h4>
 
 
           <ul class= "row">

@@ -16,9 +16,6 @@ class Player < ApplicationRecord
 
   def remove_from_games
     Game.where("player_id = #{self.id}").destroy_all
-    Game.all.each do |game|
-      game.players.delete(self)
-    end
     PlayerTeam.where("player_id = #{self.id}").destroy_all
   end
 

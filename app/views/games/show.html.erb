@@ -85,11 +85,13 @@
   </div>
 </div>
 
-<div class="row m-0">
+<div class="row m-0" id="reviews">
   <div class="card">
     <h3>Reviews</h3>
     <% if @game.reviews.empty? %>
       <small><em>Be the first one to review this list</em></small>
+    <% else %>
+      <p>Average rating: <%= @game.reviews.inject(0) { |review| review.rating } %></p>
     <% end %>
     <ul>
       <li>
@@ -97,7 +99,7 @@
           <% review.rating.to_i.times do %>
             <%= "⭐️" %>
           <% end %>
-          <%= review.comment %>
+          <p>"<%= review.comment %>" - <%= review.player.name %></p>
         <% end %>
       </li>
     </ul>

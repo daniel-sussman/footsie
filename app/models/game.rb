@@ -24,7 +24,4 @@ class Game < ApplicationRecord
   validates :gender, acceptance: { accept: ['male', 'female', 'co-ed'] }
   validates :team_size, numericality: { only_integer: true, greater_than_or_equal_to: 5, less_than_or_equal_to: 11 }
   validates :pitch_type, presence: true, inclusion: { in: %w[grass 3-G astroturf] }
-  validates :day_of_week, presence: true, inclusion: { in: %w[Monday Tuesday Wednesday Thursday Friday Saturday Sunday] }
-  validates :starting_date, presence: true
-  validates :ending_date, comparison: { greater_than: :starting_date }
 end

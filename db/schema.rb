@@ -56,7 +56,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_23_221829) do
     t.string "address"
     t.date "starting_date"
     t.date "ending_date"
-    t.text "recurring_rule"
+    t.string "day_of_week"
+    t.time "start_time"
+    t.text "recurrence_rule"
     t.bigint "player_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

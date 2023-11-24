@@ -17,7 +17,7 @@
       <div class="decription-card text-container">
         <h3><b>Description</b></h3>
         <p><%= @game.description %></p>
-        <p><b>Price per person:</b> £<%=@game.price %></p>
+        <p><b>Price per person:</b> £<%= '%.2f' % @game.price %></p>
         <p><b>Gender:</b> <%= @game.gender %></p>
         <p><b>This game currently has </b> <%= @players.count %> / <%= 2 * @game.team_size %> players</p>
         <p><b>Pitch ID:</b> <%= @game.pitch_identifier %></p>
@@ -98,7 +98,7 @@
       <% if @game.reviews.empty? %>
         <small><em>Be the first one to review this list</em></small>
       <% else %>
-        <p>Average rating: <%= @game.reviews.inject(0) { |sum, review| review.rating } / @game.reviews.count %></p>
+        <p>Average rating: <%= ( @game.reviews.inject(0.0) { |sum, review| sum + review.rating } / @game.reviews.count ).round(1) %></p>
       <% end %>
       <ul>
         <li>
@@ -113,11 +113,10 @@
   <hr>
   <div class="row m-0">
     <div class="container d-flex">
-      <div style="width: 100%; height: 400px;"
+       <div style='width: 100%; height: 400px;'
         data-controller="map"
         data-map-markers-value="<%= @markers.to_json %>"
-        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-      </div>
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
   </div>
 </div>

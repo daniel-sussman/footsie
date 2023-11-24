@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row ">
+    <div class="col-md-12 mt-2  card-container">
+      <div class="row">
+        <% @games.each do |game| %>
+        <div class="col-md-4 mb-4">
+          <div class="card-flyer h-100" style="color: <%= @open_games.include?(game) ? 'green' : 'red' %>;">
+            <div class="text-box ">
+              <div class="image-box ">
+                <% if game.photo.present? %>
+                  <%= cl_image_tag game.photo.key, crop: :fill %>
+                <% else %>
+                  <%= image_tag "football_#{%w[green red blue purple orange teal azul beige navy rojo sun verde yellow][game.id % 13]}.png" %>
+                <% end %>
+                </div>
+                <div class="text-container">
+                  <h2><%= game.name %></h2>
+                  <p><b>£<%= game.price %></b> per person</p>
+                  <p><b>Gender:</b> <%= game.gender %></p>
+                  <p><b>Address:</b> <%= game.address %></p>
+                  <div class="btn-custom d-flex justify-content-between mt-8">
+                    <button class="button2 mt-2"><span><%= link_to "Read more", game_path(game) %></span></button>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,29 @@
-<div class="d-flex" style="overflow: hidden;">
-  <div>
-    <%= render "games/boxes_container" %>
-  </div>
-  <div class="map-container"
-    data-controller="map"
-    data-map-pos-value="<%= @coords.reverse %>"
-    data-map-markers-value="<%= @markers.to_json %>"
-    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-  >
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-7 mb-0">
+      <div>
+        <div class="headline mx-3 mt-5">
+          <form class="" action='<%= search_games_path %>' method='get'>
+            <h4 class="mb-3">Showing games near <%= params[:query] %>...</h4>
+            <div class="input-group mb-4">
+              <input type="search" name='query' placeholder="Search a different area..." aria-describedby="button-addon6" class="form-control">
+              <div class="input-group-append">
+                <button id="button-addon6" type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <%= render "games/mapbox_container" %>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="map-container"
+        data-controller="map"
+        data-map-pos-value="<%= @coords.reverse %>"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+      >
+      </div>
+    </div>
   </div>
 </div>

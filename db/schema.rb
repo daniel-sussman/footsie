@@ -45,6 +45,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_23_221829) do
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.string "red_team_name"
+    t.string "blue_team_name"
     t.float "price", default: 0.0
     t.string "gender"
     t.integer "team_size"
@@ -63,16 +65,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_23_221829) do
     t.float "latitude"
     t.float "longitude"
     t.index ["player_id"], name: "index_games_on_player_id"
-  end
-
-  create_table "player_games", force: :cascade do |t|
-    t.bigint "game_id", null: false
-    t.bigint "player_id", null: false
-    t.boolean "active", default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_player_games_on_game_id"
-    t.index ["player_id"], name: "index_player_games_on_player_id"
   end
 
   create_table "player_teams", force: :cascade do |t|
@@ -123,8 +115,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_23_221829) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "games", "players"
-  add_foreign_key "player_games", "games"
-  add_foreign_key "player_games", "players"
   add_foreign_key "player_teams", "players"
   add_foreign_key "player_teams", "teams"
   add_foreign_key "reviews", "games"

@@ -1,64 +1,67 @@
 <div class="container">
-  <div class="d-flex p-2">
-    <h1>My profile</h1>
-    <% if @player.photo.present? %>
-      <%= cl_image_tag @player.photo.key, crop: :fill %>
-    <% else %>
-      <%= image_tag "football_#{%w[green red blue purple orange teal][@player.id % 6]}.png" %>
-    <% end %>
-    <ul>
-        <% if @player_teams.size > 0 %>
-          <% light = "🟢"%>
+  <div class="d-flex p-2 ROW">
+    <div class="col-5">
+      <h2>My profile</h2>
+      <div class="profile_img">
+        <% if @player.photo.present? %>
+          <%= cl_image_tag @player.photo.key, crop: :fill %>
         <% else %>
-          <% light = "🔴"%>
-        <% end%>
-        <li>
-          <%= "#{@player.name} #{light}" %>
-        </li>
-        <li>
-          <%= @player.gender %>
-        </li>
-        <li>
-          <%= @player.description %>
-        </li>
-    </ul>
-    <h2>My games:</h2>
-    <% if @player_teams.present? %>
+          <%= image_tag "football_#{%w[green red blue purple orange teal][@player.id % 6]}.png" %>
+        <% end %>
+      </div>
       <ul>
-          <% if @host_games.size > 0 %>
-            <% @host_games.each do |game| %>
-              <li>
-                <%= link_to game.name, game_path(game) %>
-                <p>I am the host of this game</p>
-              </li>
+          <% if @player_teams.size > 0 %>
+            <% light = "🟢"%>
+          <% else %>
+            <% light = "🔴"%>
+          <% end%>
+          <li>
+            <%= "#{@player.name} #{light}" %>
+          </li>
+          <li>
+            <%= @player.gender %>
+          </li>
+          <li>
+            <%= @player.description %>
+          </li>
+      </ul>
+    </div>
+    <div class="col-7">
+      <h2>My games:</h2>
+      <% if @player_teams.present? %>
+        <ul>
+            <% if @host_games.size > 0 %>
+              <% @host_games.each do |game| %>
+                <li>
+                  <%= link_to game.name, game_path(game) %>
+                  <p>I am the host of this game</p>
+                </li>
+              <% end %>
             <% end %>
+          <% @player_teams.each do |player_team| %>
+            <% game = player_team.game %>
+            <li>
+              <%= link_to game.name, game_path(game) %>
+              <p>Leave a review</p>
+            </li>
           <% end %>
-        <% @player_teams.each do |player_team| %>
-          <% game = player_team.game %>
-          <li>
-            <%= link_to game.name, game_path(game) %>
-            <p>Leave a review</p>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>You haven't joined any games.</p>
-      <%= link_to "Find a game to join!", games_path %>
-    <% end %>
-    <% if @past_games.present? %>
-      <h3>Finished games:</h3>
-      <ul>
-        <% @past_games.each do |game| %>
-          <li>
-            <%= link_to game.name, game_path(game) %>
-            <p>Leave a review</p>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-    <%= link_to "Edit my profile", edit_player_registration_path(@player) %>
+        </ul>
+      <% else %>
+        <p>You haven't joined any games.</p>
+        <%= link_to "Find a game to join!", games_path %>
+      <% end %>
+      <% if @past_games.present? %>
+        <h3>Finished games:</h3>
+        <ul>
+          <% @past_games.each do |game| %>
+            <li>
+              <%= link_to game.name, game_path(game) %>
+              <p>Leave a review</p>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+      <%= link_to "Edit my profile", edit_player_registration_path(@player) %>
+    </div>
   </div>
 </div>
-
-
-<%# We need to add players' photo %>

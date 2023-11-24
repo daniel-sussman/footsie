@@ -4,8 +4,9 @@ class Player < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :player_games
-  has_many :games, through: :player_games
+  has_many :player_teams, dependent: :destroy
+  has_many :teams, through: :player_teams
+  has_many :games, through: :teams
   has_many :reviews, dependent: :destroy
   has_one_attached :photo
 
@@ -18,7 +19,7 @@ class Player < ApplicationRecord
     Game.all.each do |game|
       game.players.delete(self)
     end
-    PlayerGame.where("player_id = #{self.id}").destroy_all
+    PlayerTeam.where("player_id = #{self.id}").destroy_all
   end
 
   validates :name, :address, presence: true

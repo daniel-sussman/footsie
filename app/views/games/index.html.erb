@@ -3,7 +3,7 @@
   <h3 class="hero-text">PLAY THE BEAUTIFUL GAME. <br>ANYWHERE. <br>ANYTIME.</h3>
   <form class="search-container" action='<%= search_games_path %>' method='get'>
   <% if @nono%>
-  <h3 style='color: red;'>enter a goddamn query</h3>
+  <h3 style='color: red;'>Please enter a query</h3>
   <%end%>
     <input type="text" name='query' placeholder="Enter your postcode...">
     <input class="button1" type="submit" value='Find a Game'>

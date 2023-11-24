@@ -3,6 +3,8 @@ class CreateGames < ActiveRecord::Migration[7.1]
     create_table :games do |t|
       t.string :name
       t.text :description
+      t.string :red_team_name
+      t.string :blue_team_name
       t.float :price, default: 0.0
       t.string :gender
       t.integer :team_size

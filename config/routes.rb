@@ -9,14 +9,14 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "games#index"
+  post "teams/:team_id", to: "player_teams#create", as: :join_team
   resources :games do
     collection do
-      post :index
       get :search
     end
-    resources :player_games, only: [:create]
     resources :reviews, only: [:new, :create]
   end
   resources :players, only: [:show, :new, :create]
-  resources :player_games, only: [:update]
+  resources :player_teams, only: [:update]
+
 end
